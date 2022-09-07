@@ -1,3 +1,135 @@
+/* NORMALIZER */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a, a:active, a:focus, a:hover {
+    text-decoration: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+/* Global */
 .dark-template{
-    background-color: #0080FF;
+    background-color: #FDB827;
+}
+
+/* Header*/ 
+.ttl-header{
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: #542583;
+}
+
+.list-header{
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.list-header-items{
+    padding: .5rem;
+    text-align: center;
+    border-radius: 10%;
+    background-color: #542583;
+    font-size: 1.1rem;
+}
+
+.header-link{
+    color: #FDB827;
+}
+
+/* Section */ 
+.list{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 75%;
+    margin: 30vh auto;
+    padding: 1rem;
+    color: #FDB827;
+    border-radius: 5%;
+    background-color: #542583;
+}
+
+.list-items{
+    list-style: none;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+@media screen and (min-width: 550px) {
+    .ttl-header{
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        font-size: 2rem;
+    }
+    .list-header{
+        width: 40%;
+    }
+    .list-header-items{
+        padding: 1rem;
+        font-size: 1.2rem;
+    }
+    .list{
+        width: 50%;
+    }
+    .list-items{
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .ttl-header{
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+        font-size: 3rem;
+    }
+    .list-header{
+        width: 30%;
+    }
+    .list-header-items{
+        padding: 1rem;
+        font-size: 1.6rem;
+    }
+    .list{
+        width: 40%;
+    }
+    .list-items{
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+    }
 }
