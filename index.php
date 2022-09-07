@@ -1,7 +1,7 @@
 <?php
 try {
     $dbCo = new PDO(
-        'mysql:host=localhost;dbname=mydatabase;charset=utf8',
+        'mysql:host=localhost;dbname=todolist;charset=utf8',
         'todolist',
         'axaLpG9jTP[(pTZE'
     );
@@ -13,6 +13,9 @@ try {
     die("Unable to connect to the database.
         " . $e->getMessage());
 };
+// 0 = tâche non faite
+// 1 = tâche faite
+require_once "includes/_functions.php"
 ?>
 
 <!DOCTYPE html>
@@ -49,16 +52,13 @@ try {
                     <input type="text" placeholder="Ajouter une tâche"><input type="submit" value="OK">
                 </div>
             </form> -->
-        <ul class="list">
-            <?php
-
-            ?>
-            <li class="list-items">Faire les courses</li>
-            <li class="list-items">Faire ses devoirs</li>
-            <li class="list-items">Faire à manger</li>
-            <li class="list-items">Ranger le garage</li>
-            <li class="list-items">Ranger la chambre</li>
-        </ul>
+        <!-- <ul class="list"> -->
+        <?php
+        $query = $dbCo->prepare("SELECT description_task, date_reminder FROM task WHERE done = 0");
+        $query->execute();
+        $result = $query->fetchAll();
+        echo getHTMLFromToDoList($result, "list", "list-items");
+        ?>
     </section>
 
 

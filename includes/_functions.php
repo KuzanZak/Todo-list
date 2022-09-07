@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gives the HTML list from the given array. 
  *
@@ -13,6 +14,18 @@ function getHtmlFromArray(array $array, string $classUl = null, string $classLi 
     if ($classLi) $classLi = " class=\"$classLi\"";
     $valueToLi = fn ($v) => "<li$classLi>$v</li>";
     return "<ul$classUl>" . implode("", array_map($valueToLi, $array)) . "</ul>";
+}
+
+
+function getHTMLFromToDoList(array $array, string $classUl = null, string $classLi = null): string
+{
+    $string = "";
+    if ($classUl) $classUl = " class=\"$classUl\"";
+    if ($classLi) $classLi = " class=\"$classLi\"";
+    foreach ($array as $task) {
+        $string .= "<li$classLi>" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
+    }
+    return "<ul$classUl>" . $string . "</ul>";;
 }
 
 /**
@@ -48,7 +61,8 @@ function getHtmlTitle(int $level, string $content, string $classCss = null): str
  * @param string|null $classCss     CSS class to add
  * @return string
  */
-function getHtmlLink(string $href, string $content, string $classCss = null):string {
+function getHtmlLink(string $href, string $content, string $classCss = null): string
+{
     if ($classCss) $classCss = " class=\"$classCss\"";
     return "<a href=\"$href\"$classCss>$content</a>";
 }
@@ -86,7 +100,8 @@ function getHtmlSerie(array $serie, bool $isFull = false): string
  * @param integer $currentPage
  * @return string
  */
-function getNavLink(array $page, int $currentPage = 1):string {
+function getNavLink(array $page, int $currentPage = 1): string
+{
     $class = "main-nav-link";
     if ($currentPage === $page["pageNumber"]) $class .= " active";
     return getHtmlLink($page["href"], $page["pageTitle"], $class);
@@ -99,13 +114,14 @@ function getNavLink(array $page, int $currentPage = 1):string {
  * @param integer $currentPage
  * @return string
  */
-function getMainNavigation(array $pages, int $currentPage = 1):string {
+function getMainNavigation(array $pages, int $currentPage = 1): string
+{
     // $html = "";
     // foreach($pages as $page) {
     //     $class = "main-nav-link";
     //     if ($currentPage === $page["pageNumber"]) $class .= " active";
     //     $html .= "<li>".getHtmlLink($page["href"], $page["pageTitle"], $class)."</li>";
     // }
-    
-    return "<nav class=\"main-nav\">".getHtmlFromArray(array_map(fn($p) => getNavLink($p, $currentPage), $pages), "main-nav-list")."</nav>";
+
+    return "<nav class=\"main-nav\">" . getHtmlFromArray(array_map(fn ($p) => getNavLink($p, $currentPage), $pages), "main-nav-list") . "</nav>";
 }

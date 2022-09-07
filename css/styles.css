@@ -86,6 +86,7 @@ button:focus {
 
 .list-items{
     list-style: none;
+    text-align: center;
     margin-bottom: 1rem;
     font-size: 1.1rem;
 }
