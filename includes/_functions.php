@@ -17,15 +17,15 @@ function getHtmlFromArray(array $array, string $classUl = null, string $classLi 
 }
 
 
-function getHTMLFromToDoList(array $array, string $classUl = null, string $classLi = null, string $classInput = null, bool $factor = false): string
+function getHTMLFromToDoList(array $array, string $classUl = null, string $classLi = null, string $classLink = null, bool $factor = false): string
 {
     $string = "";
     if ($classUl) $classUl = " class=\"$classUl\"";
     if ($classLi) $classLi = " class=\"$classLi\"";
-    if ($classInput) $classInput = " class=\"$classInput\"";
+    if ($classLink) $classLink = " class=\"$classLink\"";
     foreach ($array as $task) {
         if ($factor === true) {
-            $string .= "<li$classLi><input type=\"checkbox\" $classInput>" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
+            $string .= "<li$classLi><a href=\"index.php?action=done&id_task=" . $task["id_task"] . "\" $classLink><i class=\"fa fa-square-o icon\" aria-hidden=\"true\"></i></a>" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
         } else {
             $string .= "<li$classLi>" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
         }

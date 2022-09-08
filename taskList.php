@@ -8,7 +8,7 @@ include "includes/_header.php";
     </div>
     <div class="taskList-form">
         <label for="date" class="label-form">Date limite : </label>
-        <input class="input-form" type="date" name="date" id="date">
+        <input class="input-form" type="date" name="date" id="date" min="<?php date("Y-m-d") ?>">
     </div>
     <div class="taskList-form">
         <label for="color" class="label-form">Couleur : </label>

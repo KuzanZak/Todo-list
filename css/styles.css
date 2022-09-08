@@ -1,3 +1,6 @@
+@import url(font-awesome.min.css);
+
+
 :root {
     font-size: 16px;
 
@@ -105,8 +108,13 @@ button:focus {
     position : absolute; 
     left : 0;
     margin-left: .4rem;
-    /* margin : 1rem; */
+}
 
+.icon{
+    font-size: 1rem;
+    border: 0;
+    color: var(--yellow);
+    background-color: var(--yellow);
 }
 
 /* Formulaire*/ 
