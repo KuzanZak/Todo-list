@@ -20,6 +20,9 @@
                 <li class="list-header-items">
                     <a class="header-link" href="taskList.php">Ajout de tâche</a>
                 </li>
+                <li class="list-header-items">
+                    <a class="header-link" href="taskDone.php">Tâches effectuées</a>
+                </li>
             </ul>
         </nav>
     </header>

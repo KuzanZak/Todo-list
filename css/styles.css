@@ -85,7 +85,8 @@ button:focus {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 75%;
+    position : relative; 
+    width: 95%;
     margin: 30vh auto;
     padding: 1rem;
     color: var(--yellow);
@@ -98,6 +99,14 @@ button:focus {
     text-align: center;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+}
+
+.list-checkbox{
+    position : absolute; 
+    left : 0;
+    margin-left: .4rem;
+    /* margin : 1rem; */
+
 }
 
 /* Formulaire*/ 

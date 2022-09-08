@@ -18,10 +18,10 @@ try {
 require_once "includes/_functions.php";
 include "includes/_header.php";
 
-$query = $dbCo->prepare("SELECT description_task, date_reminder FROM task WHERE done = 0");
+$query = $dbCo->prepare("SELECT description_task, date_reminder FROM task WHERE done = 1");
 $query->execute();
 $result = $query->fetchAll();
-echo getHTMLFromToDoList($result, "list", "list-items", "list-checkbox", true);
+echo getHTMLFromToDoList($result, "list", "list-items");
 ?>
 
 
