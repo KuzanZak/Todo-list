@@ -1,3 +1,12 @@
+:root {
+    font-size: 16px;
+
+    /* Colors */
+    --yellow: #FDB827;
+    --violet: #542583;
+}
+
+
 /* NORMALIZER */
 
 * {
@@ -37,7 +46,7 @@ button:focus {
 
 /* Global */
 .dark-template{
-    background-color: #FDB827;
+    background-color: var(--yellow);
 }
 
 /* Header*/ 
@@ -47,7 +56,7 @@ button:focus {
     text-align: center;
     text-decoration: underline;
     text-transform: uppercase;
-    color: #542583;
+    color: var(--violet);
 }
 
 .list-header{
@@ -59,15 +68,15 @@ button:focus {
 }
 
 .list-header-items{
-    padding: .5rem;
+    padding: .4rem;
     text-align: center;
     border-radius: 10%;
-    background-color: #542583;
+    background-color: var(--violet);
     font-size: 1.1rem;
 }
 
 .header-link{
-    color: #FDB827;
+    color: var(--yellow);
 }
 
 /* Section */ 
@@ -79,9 +88,9 @@ button:focus {
     width: 75%;
     margin: 30vh auto;
     padding: 1rem;
-    color: #FDB827;
+    color: var(--yellow);
     border-radius: 5%;
-    background-color: #542583;
+    background-color: var(--violet);
 }
 
 .list-items{
@@ -89,6 +98,39 @@ button:focus {
     text-align: center;
     margin-bottom: 1rem;
     font-size: 1.1rem;
+}
+
+/* Formulaire*/ 
+.taskList-form{
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 1rem 0.5rem;
+}
+
+.label-form{
+    color: #542583;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.input-form{
+    margin-top: .2rem;
+    padding: .5rem;
+    border-radius: 20%;
+    border: none;
+}
+
+.submit-form{
+    background-color: var(--violet);
+    color: var(--yellow);
+    border: none;
+    padding: .5rem;
+    border-radius: 10%;
+    width: 30%;
+    position: absolute;
+    right: 1rem;
 }
 
 @media screen and (min-width: 550px) {
@@ -111,6 +153,16 @@ button:focus {
         font-size: 1.2rem;
         margin-bottom: 1rem;
     }
+    .taskList-form{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .submit-form{
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        right: 0;
+    }
 }
 
 @media screen and (min-width: 900px) {
@@ -132,5 +184,30 @@ button:focus {
     .list-items{
         font-size: 1.6rem;
         margin-bottom: 1rem;
+    }
+
+    .taskList-form{
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .label-form{
+        font-size: 2rem;
+    }
+    .input-form{
+        margin-top: 1rem;
+        padding: 1.5rem;
+        border-radius: 15%;
+        border: none;
+        font-size: 1.6rem;
+    }
+
+    .submit-form{
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        right: 0;
+        padding: 1rem;
+        font-size: 2rem;
     }
 }
