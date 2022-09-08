@@ -117,6 +117,16 @@ button:focus {
     background-color: var(--yellow);
 }
 
+.paragraph{
+    text-align: center;
+    padding: 2rem;
+    text-transform: uppercase;
+}
+
+.link-comments{
+    color: var(--yellow);
+}
+
 /* Formulaire*/ 
 .taskList-form{
     display: grid;

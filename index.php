@@ -13,8 +13,7 @@ try {
     die("Unable to connect to the database.
         " . $e->getMessage());
 };
-// 0 = tâche non faite
-// 1 = tâche faite
+
 require_once "includes/_functions.php";
 include "includes/_header.php";
 
@@ -29,10 +28,7 @@ if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "do
     ]);
     header("location:index.php");
 };
-
 ?>
-
-
 <?php
 include "includes/_footer.php";
 ?>

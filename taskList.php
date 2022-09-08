@@ -1,14 +1,14 @@
 <?php
 include "includes/_header.php";
 ?>
-<form action="" method="get" class="taskList-form">
+<form action="" method="post" class="taskList-form">
     <div class="taskList-form">
         <label for="description" class="label-form">Description : </label>
-        <input class="input-form" type="textarea" name="description" id="description">
+        <input class="input-form" type="textarea" name="description" id="description" min="5" maxlength="255">
     </div>
     <div class="taskList-form">
         <label for="date" class="label-form">Date limite : </label>
-        <input class="input-form" type="date" name="date" id="date" min="<?php date("Y-m-d") ?>">
+        <input class="input-form" type="date" name="date" id="date" min="<?= date("Y-m-d") ?>">
     </div>
     <div class="taskList-form">
         <label for="color" class="label-form">Couleur : </label>
@@ -35,23 +35,19 @@ try {
         " . $e->getMessage());
 };
 
-
-if (!isset($description) && !isset($date) && !isset($color) && !isset($priority)) return;
-$description = $_GET["description"];
-$date = $_GET["date"];
-$color = $_GET["color"];
-$query =  $dbCo->query("SELECT Max(priority) + 1 AS priority FROM task WHERE id_user = 1;");
+$query =  $dbCo->query("SELECT Max(priority) + 1 AS priority FROM task WHERE id_user = 1");
 $priority = $query->fetchall();
 $priority = $priority[0]["priority"];
 
-if (isset($description) && isset($date) && isset($color) && isset($priority)) {
+
+if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($priority)) {
     $query = $dbCo->prepare("INSERT INTO task(`description_task`, `date_reminder`, `color`, `priority`, `id_user`) values (:description, :date, :color, :priority, :user)");
     $query->execute([
-        ":description" => $description,
-        ":date" => $date,
-        ":color" => $color,
-        ":priority" => $priority,
-        ":user" => 1
+        "description" => $_POST["description"],
+        "date" => $_POST["date"],
+        "color" => $_POST["color"],
+        "priority" => $priority,
+        "user" => 1
     ]);
 }
 
