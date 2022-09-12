@@ -41,14 +41,27 @@ $priority = $priority[0]["priority"];
 
 
 if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($priority)) {
-    $query = $dbCo->prepare("INSERT INTO task(`description_task`, `date_reminder`, `color`, `priority`, `id_user`) values (:description, :date, :color, :priority, :user)");
-    $query->execute([
-        "description" => $_POST["description"],
-        "date" => $_POST["date"],
-        "color" => $_POST["color"],
-        "priority" => $priority,
-        "user" => 1
-    ]);
+    $description = strip_tags($_POST["description"]);
+    $date = strip_tags($_POST["date"]);
+    $color = strip_tags($_POST["color"]);
+    $priority = strip_tags($priority);
+    $priority = intval($priority);
+    if (!ctype_xdigit($color)) echo "<script>alert(\"Le code hexadécimal n'est pas correct!\")</script>";
+    if (mb_strlen($description) < 255 && $date > date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($priority)) {
+        $query = $dbCo->prepare("INSERT INTO task(`description_task`, `date_reminder`, `color`, `priority`, `id_user`) values (:description, :date, :color, :priority, :user)");
+        $query->execute([
+            "description" => $description,
+            "date" => $date,
+            "color" => $color,
+            "priority" => $priority,
+            "user" => 1
+        ]);
+        // var_dump($query);
+        $nb = $query->rowCount();
+        // var_dump(($nb));
+        if ($nb >= 1) echo "<script>alert(\"La tâche a été ajoutée avec succès :)\")</script>";
+        else echo "<script>alert(\"Malheureusement, la tâche n'a pas été ajoutée :/\")</script>";
+    }
 }
 
 

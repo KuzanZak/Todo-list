@@ -46,18 +46,26 @@ $result = $query->fetch();
 
 
 <?php
-var_dump($_POST);
-if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($_POST["id_task"])) {
-    $query = $dbCo->prepare("UPDATE task SET `description_task` = :description, `date_reminder` = :date, `color` = :color WHERE id_task = :idtask");
-    $query->execute([
-        "description" => $_POST["description"],
-        "date" => $_POST["date"],
-        "color" => $_POST["color"],
-        "idtask" => $_POST["id_task"]
-    ]);
-    var_dump($_POST);
-}
 
+if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($_POST["id_task"])) {
+    $description = strip_tags($_POST["description"]);
+    $date = strip_tags($_POST["date"]);
+    $color = strip_tags($_POST["color"]);
+    $idtask = strip_tags($_POST["id_task"]);
+    $idtask = intval($idtask);
+    if (!ctype_xdigit($color)) echo "<script>alert(\"Le code hexadécimal n'est pas correct!\")</script>";
+    if (mb_strlen($description) < 255 && $date > date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($idtask)) {
+        $query = $dbCo->prepare("UPDATE task SET `description_task` = :description, `date_reminder` = :date, `color` = :color WHERE id_task = :idtask");
+        $query->execute([
+            "description" => $description,
+            "date" => $date,
+            "color" => $color,
+            "idtask" => $idtask
+        ]);
+        $nb = $query->rowCount();
+        header("location: index.php");
+    }
+}
 ?>
 
 <?php
