@@ -18,7 +18,7 @@ try {
 require_once "includes/_functions.php";
 include "includes/_header.php";
 
-$query = $dbCo->prepare("SELECT description_task, date_reminder FROM task WHERE done = :done");
+$query = $dbCo->prepare("SELECT id_task, description_task, date_reminder FROM task WHERE done = :done");
 $query->execute([
     "done" => 1
 ]);

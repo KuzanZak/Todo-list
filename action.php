@@ -95,3 +95,25 @@ if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "de
     header("location:index.php");
     exit;
 };
+
+if (isset($_GET["action"]) && $_GET["action"] === "redone" && isset($_GET["id_task"])) {
+    $query =  $dbCo->prepare("SELECT id_task FROM task WHERE id_task = :idtask");
+    $query->execute([
+        "idtask" => $_GET["id_task"]
+    ]);
+    $queryD = $dbCo->prepare("UPDATE task SET done = 0 WHERE id_task = :idtask;");
+    $queryD->execute([
+        "idtask" => $_GET["id_task"]
+    ]);
+
+    $query =  $dbCo->query("SELECT Max(priority) + 1 AS priority FROM task WHERE id_user = 1");
+    $priority = $query->fetch();
+    $priority = $priority["priority"];
+
+    $queryPI = $dbCo->prepare("UPDATE task SET priority = $priority WHERE id_task = :idtask;");
+    $queryPI->execute([
+        "idtask" => $_GET["id_task"]
+    ]);
+    header("location:index.php");
+    exit;
+};
