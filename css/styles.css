@@ -105,16 +105,12 @@ button:focus {
     text-align:left;
     margin: .5rem .5rem;
     font-size: 1.1rem;
-    /* display: grid;
-    width: 100%;
-    grid-template-columns: 5% 75% 5% 5% 5% 5%;
-    gap: .1rem; */
 }
 
 .list-checkbox{
     position: absolute;
     left : 0;
-    padding: 0 .2rem;
+    padding: 0 .3rem;
 }
 
 .list-links{
@@ -145,20 +141,21 @@ button:focus {
     display: grid;
     grid-template-columns: 1fr;
     width: 100%;
-    padding: 1rem 0.5rem;
+    gap: .5rem;
+    margin-top: 1rem;
+    padding: .2rem 0.5rem;
 }
 
 .label-form{
-    color: #542583;
-    font-size: 1.1rem;
+    color: var(--violet);
+    font-size: 1.25rem;
     font-weight: bold;
     text-decoration: underline;
 }
 
 .input-form{
-    margin-top: .2rem;
-    padding: .5rem;
-    border-radius: 20%;
+    padding: .6rem;
+    border-radius: 10%;
     border: none;
 }
 
@@ -169,57 +166,51 @@ button:focus {
     padding: .5rem;
     border-radius: 10%;
     width: 30%;
+    font-weight: bold;
     position: absolute;
     right: 1rem;
 }
 
 @media screen and (min-width: 550px) and (max-width: 899px) {
     .header{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 3rem;
-
+        display: grid;
+        grid-template-columns: 20% 80%;
+        gap: 1rem;
     }
-    .ttl-header{
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-        padding-left: 2rem;
+    .ttl-span{
         font-size: 2rem;
         text-align: left;
-        width: 90%;
+        width: 100%;
     }
     .list-header{
-        width: 100%;
-        grid-template-columns: repeat(4, 1fr);
-    }
-    .list-header-items{
-        padding: 1.5rem;
-        font-size: 1.2rem;
-        background-color: var(--yellow);
+        width: 80%;
+        grid-template-columns: repeat(3, 1fr);
+        margin-top: 2rem;
+        padding-right: .3rem;
     }
     .header-link{
         color: var(--violet);
     }
     .list{
-        width: 50%;
+        width: 90%;
     }
     .list-items{
         font-size: 1.2rem;
-        margin-bottom: 1rem;
     }
     .taskList-form{
-        width: 90%;
+        width: 95%;
         margin: 0 auto;
     }
     .input-form{
-        font-size: 1.5rem;
+        font-size: 1.2rem;
     }
     .label-form{
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
+    
     .submit-form{
         position: relative;
-        width: 100%;
+        width: 80%;
         margin: 0 auto;
         right: 0;
         font-size: 1.2rem;
@@ -228,36 +219,44 @@ button:focus {
 
 @media screen and (min-width: 900px) {
     .ttl-header{
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-        font-size: 3rem;
+        margin: 1.5rem auto;
+    }
+    .ttl-span{
+        font-size: 4rem;
+
+    }
+    .nav-header{
+        margin-bottom: 2rem;
     }
     .list-header{
-        width: 30%;
+        width: 50%;
     }
     .list-header-items{
-        padding: 1rem;
-        font-size: 1.6rem;
+        padding: .5rem;
+        font-size: 2rem;
     }
     .list{
-        width: 40%;
+        width: 60%;
     }
     .list-items{
-        font-size: 1.6rem;
+        font-size: 1.8rem;
         margin-bottom: 1rem;
+    } 
+    .icon{
+        font-size: 1.4rem;
     }
-
     .taskList-form{
-        width: 80%;
-        margin: 0 auto;
+        width: 60%;
+        margin: 0 auto;        
     }
-
     .label-form{
         font-size: 2rem;
     }
+    
     .input-form{
-        margin-top: 1rem;
-        padding: 1.5rem;
+        margin-top: .5rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
         border-radius: 15%;
         border: none;
         font-size: 1.6rem;
@@ -265,10 +264,11 @@ button:focus {
 
     .submit-form{
         position: relative;
-        width: 100%;
+        width: 80%;
         margin: 0 auto;
         right: 0;
-        padding: 1rem;
-        font-size: 2rem;
+        padding: .5rem;
+        font-size: 1.8rem;
+        font-weight: 100;
     }
 }

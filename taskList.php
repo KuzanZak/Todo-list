@@ -1,7 +1,7 @@
 <?php
 include "includes/_header.php";
 ?>
-<form action="" method="post" class="taskList-form">
+<form action="" method="post" class="main-taskList-form">
     <div class="taskList-form">
         <label for="description" class="label-form">Description : </label>
         <input class="input-form" type="textarea" name="description" id="description" min="5" maxlength="255">

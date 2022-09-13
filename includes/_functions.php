@@ -57,7 +57,7 @@ function getHTMLFromToDoList(array $array, string $classUl = null, string $class
     if (!empty($string)) {
         return "<ul$classUl onDragStart=\"start(event)\" onDragOver=\"return over(event)\" onDrop=\"return drop(event)\">" . $string . "</ul>";
     } else {
-        return "<p class=\"paragraph\">Ajoutez des tâches à faire</p>";
+        return "<p class=\"paragraph\">Aucune tâches effectuées</p>";
     }
 }
 /**
