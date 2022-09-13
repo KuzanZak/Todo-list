@@ -25,13 +25,13 @@ function getHTMLFromToDoList(array $array, string $classUl = null, string $class
     if ($classLink) $classLink = " class=\"$classLink\"";
     foreach ($array as $task) {
         if ($factor === true) {
-            $string .= "<li$classLi><a href=\"index.php?action=done&id_task=" . $task["id_task"] . "\" $classLink><i class=\"fa fa-square-o icon\" aria-hidden=\"true\"></i></a>" . $task["description_task"] . " " . $task["date_reminder"] . "<a href=\"taskListModify.php?action=modify&id_task=" . $task["id_task"] . "\"><i class=\"fa fa-commenting-o link-comments\" aria-hidden=\"true\"></i></a></li>";
+            $string .= "<li$classLi id=\"" . $task["id_task"] . "\" draggable=\"true\"><a href=\"action.php?action=done&id_task=" . $task["id_task"] . "\" $classLink><i class=\"fa fa-square-o icon\" aria-hidden=\"true\"></i></a>" . $task["description_task"] . " " . $task["date_reminder"] . "<a href=\"taskListModify.php?action=modify&id_task=" . $task["id_task"] . "\"><i class=\"fa fa-commenting-o link-comments\" aria-hidden=\"true\"></i></a></li>";
         } else {
-            $string .= "<li$classLi>" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
+            $string .= "<li$classLi draggable=\"true\">" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
         }
     }
     if (!empty($string)) {
-        return "<ul$classUl>" . $string . "</ul>";
+        return "<ul$classUl onDragStart=\"start(event)\" onDragOver=\"return over(event)\" onDrop=\"return drop(event)\">" . $string . "</ul>";
     } else {
         return "<p class=\"paragraph\">Ajoutez des tâches à faire</p>";
     }
