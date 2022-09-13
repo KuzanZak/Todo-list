@@ -25,8 +25,6 @@ $query->execute([
 $result = $query->fetchAll();
 echo getHTMLFromToDoList($result, "list", "list-items");
 ?>
-
-
 <?php
 include "includes/_footer.php";
 ?>

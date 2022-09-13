@@ -47,7 +47,7 @@ if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color
     $priority = strip_tags($priority);
     $priority = intval($priority);
     if (!ctype_xdigit($color)) echo "<script>alert(\"Le code hexadécimal n'est pas correct!\")</script>";
-    if (mb_strlen($description) < 255 && $date > date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($priority)) {
+    if (mb_strlen($description) < 255 && $date >= date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($priority)) {
         $query = $dbCo->prepare("INSERT INTO task(`description_task`, `date_reminder`, `color`, `priority`, `id_user`) values (:description, :date, :color, :priority, :user)");
         $query->execute([
             "description" => $description,

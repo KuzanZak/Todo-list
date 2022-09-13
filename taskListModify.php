@@ -54,7 +54,7 @@ if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color
     $idtask = strip_tags($_POST["id_task"]);
     $idtask = intval($idtask);
     if (!ctype_xdigit($color)) echo "<script>alert(\"Le code hexadécimal n'est pas correct!\")</script>";
-    if (mb_strlen($description) < 255 && $date > date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($idtask)) {
+    if (mb_strlen($description) < 255 && $date >= date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($idtask)) {
         $query = $dbCo->prepare("UPDATE task SET `description_task` = :description, `date_reminder` = :date, `color` = :color WHERE id_task = :idtask");
         $query->execute([
             "description" => $description,
