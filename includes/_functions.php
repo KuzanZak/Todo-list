@@ -44,10 +44,12 @@ function getHTMLFromToDoList(array $array, string $classUl = null, string $class
     if ($classLink) $classLink = " class=\"$classLink\"";
     foreach ($array as $task) {
         if ($factor === true) {
-            $string .= "<li$classLi id=\"" . $task["id_task"] . "\" draggable=\"true\"><a href=\"action.php?action=done&id_task=" . $task["id_task"] . "\" $classLink><i class=\"fa fa-square-o icon\" aria-hidden=\"true\"></i></a>" . $task["description_task"] . " " . $task["date_reminder"] . "
-            <a href=\"taskListModify.php?action=modify&id_task=" . $task["id_task"] . "\"><i class=\"fa fa-commenting-o link-comments\" aria-hidden=\"true\"></i></a>
-            <a href=\"action.php?action=up&id_task=" . $task["id_task"] . "\"><i class=\"fa fa-caret-up link-comments up-caret\" aria-hidden=\"true\"></i></a>
-            <a href=\"action.php?action=down&id_task=" . $task["id_task"] . "\"><i class=\"fa fa-caret-down link-comments down-caret\" aria-hidden=\"true\"></i></a></li>";
+            $string .= "<li$classLi id=\"" . $task["id_task"] . "\" draggable=\"true\">
+            <a href=\"action.php?action=done&id_task=" . $task["id_task"] . "\" $classLink><i class=\"fa fa-check-square icon\" aria-hidden=\"true\"></i></a>" . $task["description_task"] . " " . $task["date_reminder"] . "
+            <div class = \"list-links\"><a href=\"taskListModify.php?action=modify&id_task=" . $task["id_task"] . "\" class=\"link-modify\"><i class=\"fa fa-commenting-o link-comments\" aria-hidden=\"true\"></i></a>
+            <a href=\"action.php?action=up&id_task=" . $task["id_task"] . "\" class=\"link-up\"><i class=\"fa fa-caret-up link-comments up-caret\" aria-hidden=\"true\"></i></a>
+            <a href=\"action.php?action=down&id_task=" . $task["id_task"] . "\" class=\"link-down\"><i class=\"fa fa-caret-down link-comments down-caret\" aria-hidden=\"true\"></i></a>
+            <a href=\"action.php?action=delete&id_task=" . $task["id_task"] . "\" class=\"link-celete\"><i class=\"fa fa-trash link-comments delete-icon\" aria-hidden=\"true\"></i></a></div></li>";
         } else {
             $string .= "<li$classLi draggable=\"true\">" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
         }
@@ -58,7 +60,6 @@ function getHTMLFromToDoList(array $array, string $classUl = null, string $class
         return "<p class=\"paragraph\">Ajoutez des tâches à faire</p>";
     }
 }
-
 /**
  * Returns serie URL from id
  *

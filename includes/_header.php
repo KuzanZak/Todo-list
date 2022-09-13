@@ -11,14 +11,14 @@
 
 <body class="dark-template">
     <header class="header">
-        <h1 class="ttl-header">To do list</h1>
+        <h1 class="ttl-header"><span class="ttl-span">To do list</span></h1>
         <nav class="nav-header">
             <ul class="list-header">
                 <li class="list-header-items">
-                    <a class="header-link" href="index.php">Tâche à faire</a>
+                    <a class="header-link" href="index.php">Tâches à effectuer</a>
                 </li>
                 <li class="list-header-items">
-                    <a class="header-link" href="taskList.php">Ajout de tâche</a>
+                    <a class="header-link" href="taskList.php">Ajout tâches</a>
                 </li>
                 <li class="list-header-items">
                     <a class="header-link" href="taskDone.php">Tâches effectuées</a>

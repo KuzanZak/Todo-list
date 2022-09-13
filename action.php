@@ -71,10 +71,10 @@ if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "do
     var_dump($priority);
 
     $query =  $dbCo->query("SELECT Max(priority) AS priority FROM task WHERE id_user = 1 AND done = 0");
-    $priority = $query->fetch();
-    $priority = $priority["priority"];
+    $Maxpriority = $query->fetch();
+    $Maxpriority = $Maxpriority["priority"];
 
-    $query = $dbCo->prepare("UPDATE task SET priority = priority + 1 WHERE id_task = :idtask AND done = 0 AND priority <> $priority");
+    $query = $dbCo->prepare("UPDATE task SET priority = priority + 1 WHERE id_task = :idtask AND done = 0 AND priority <> $Maxpriority");
     $query->execute([
         "idtask" => $_GET["id_task"]
     ]);
@@ -83,7 +83,15 @@ if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "do
     $query2->execute([
         "idtask" => $_GET["id_task"]
     ]);
+    header("location:index.php");
+    exit;
+};
 
+if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "delete") {
+    $query =  $dbCo->prepare("DELETE FROM task WHERE id_task = :idtask");
+    $query->execute([
+        "idtask" => $_GET["id_task"]
+    ]);
     header("location:index.php");
     exit;
 };
