@@ -1,11 +1,4 @@
 <?php
-$queryTD = $dbCo->prepare("SELECT GROUP_CONCAT(' ', theme_name) as themes FROM contain JOIN theme USING(id_theme) WHERE id_task = :idtask;");
-$queryTD->execute([
-    "idtask" => 8
-]);
-$queryTDID = $queryTD->fetch();
-// strip_tags($_POST["id_task"])
-var_dump($queryTDID["themes"]);
 
 /**
  * Gives the HTML list from the given array. 
@@ -60,7 +53,8 @@ function getHTMLFromToDoList(array $array, string $classUl = null, string $class
             <div class = \"list-links\">" . $task["date_reminder"] . " <a href=\"taskListModify.php?action=modify&id_task=" . $task["id_task"] . "\" class=\"link-modify\"><i class=\"fa fa-commenting-o link-comments\" aria-hidden=\"true\"></i></a>
             <a href=\"action.php?action=delete&id_task=" . $task["id_task"] . "\" class=\"link-celete\"><i class=\"fa fa-trash link-comments delete-icon\" aria-hidden=\"true\"></i></a>
             <div class=\"priority-modification\"><a href=\"action.php?action=up&id_task=" . $task["id_task"] . "\" class=\"link-up\"><i class=\"fa fa-caret-up link-comments up-caret\" aria-hidden=\"true\"></i></a>
-            <a href=\"action.php?action=down&id_task=" . $task["id_task"] . "\" class=\"link-down\"><i class=\"fa fa-caret-down link-comments down-caret\" aria-hidden=\"true\"></i></a></div></div></li>";
+            <a href=\"action.php?action=down&id_task=" . $task["id_task"] . "\" class=\"link-down\"><i class=\"fa fa-caret-down link-comments down-caret\" aria-hidden=\"true\"></i></a></div></div>
+            <div>Thèmes : " . getTheme($task["id_task"]) . "</div></li>";
         } else {
 
             $string .= "<li$classLi><a href=\"action.php?action=redone&id_task=" . $task["id_task"] . "\"><i class=\"fa fa-undo come-back\" aria-hidden=\"true\"></i></a>" . $task["description_task"] . " " . $task["date_reminder"] . "</li>";
@@ -73,7 +67,34 @@ function getHTMLFromToDoList(array $array, string $classUl = null, string $class
     }
 }
 
+function getTheme(int $idtask): string
+{
+    try {
+        $dbCo = new PDO(
+            'mysql:host=localhost;dbname=todolist;charset=utf8',
+            'todolist',
+            'axaLpG9jTP[(pTZE'
+        );
+        $dbCo->setAttribute(
+            PDO::ATTR_DEFAULT_FETCH_MODE,
+            PDO::FETCH_ASSOC
+        );
+    } catch (Exception $e) {
+        die("Unable to connect to the database.
+            " . $e->getMessage());
+    };
 
+    $queryTD = $dbCo->prepare("SELECT GROUP_CONCAT(' ', theme_name) as themes FROM contain JOIN theme USING(id_theme) WHERE id_task = :idtask;");
+    $queryTD->execute([
+        "idtask" => $idtask
+    ]);
+    $queryTDID = $queryTD->fetch();
+    $text = "";
+    if (!empty($queryTDID["themes"])) {
+        $text .= $queryTDID["themes"];
+    }
+    return $text;
+}
 
 
 function getDateFromArray(string $date): string
