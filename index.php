@@ -25,6 +25,14 @@ $query->execute([
 $result = $query->fetchAll();
 
 echo getHTMLFromToDoList($result, "list", "list-items", "list-checkbox", true);
+
+$queryTD = $dbCo->prepare("SELECT GROUP_CONCAT(' ', theme_name) as themes FROM contain JOIN theme USING(id_theme) WHERE id_task = :idtask;");
+$queryTD->execute([
+    "idtask" => 8
+]);
+$queryTDID = $queryTD->fetch();
+// strip_tags($_POST["id_task"])
+var_dump($queryTDID["themes"]);
 ?>
 <?php
 include "includes/_footer.php";

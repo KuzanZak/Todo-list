@@ -60,7 +60,7 @@ button:focus {
 }
 
 .ttl-span{
-    box-shadow: 10px 5px 5px var(--violet);
+    box-shadow: 5px 5px 5px var(--violet);
     font-size: 3rem;
 }
 
@@ -93,8 +93,9 @@ button:focus {
     justify-content: center;
     flex-direction: column;
     position : relative; 
-    width: 99%;
+    width: 90%;
     margin: 2rem auto;
+    padding: .5rem;
     color: var(--yellow);
     border-radius: 5%;
     background-color: var(--violet);
@@ -105,6 +106,11 @@ button:focus {
     text-align: center;
     margin: .5rem .5rem;
     font-size: 1.1rem;
+}
+
+.priority-modification{
+    display: flex;
+    flex-direction: column;
 }
 
 .list-checkbox{
@@ -122,6 +128,7 @@ button:focus {
 
 .icon{
     font-size: 1rem;
+    margin-left: .3rem;
     border: 0;
     color: var(--yellow);
 }
@@ -166,6 +173,20 @@ button:focus {
     padding: .6rem;
     border-radius: 10%;
     border: none;
+}
+
+.link-add-theme{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.icon-add-theme{
+    font-size: 1.5rem;
+}
+
+.display{
+    display: flex;
 }
 
 .submit-form{
