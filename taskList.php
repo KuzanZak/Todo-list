@@ -28,13 +28,13 @@ try {
         <label for="color" class="label-form">Couleur : </label>
         <input class="input-form" type="text" name="color" id="color" placeholder="Hexadecimal" maxlength="6">
     </div>
-    <fieldset id="themes">
-        <legend>Choisissez vos thèmes</legend>
+    <fieldset id="themes" class="themes">
+        <legend class="legend-themes">Choisissez vos thèmes</legend>
         <?php
         $queryT =  $dbCo->query("SELECT id_theme, theme_name AS theme FROM theme");
         $themes = $queryT->fetchall();
         foreach ($themes as $theme) {
-            echo "<div id=\"theme-list\"><label><input type=\"checkbox\" name=\"theme[]\" value=\"" . $theme["id_theme"] . "\">" . $theme["theme"] . "<label></div>";
+            echo "<div id=\"theme-list\"><label class=\"label-themes\"><input type=\"checkbox\" name=\"theme[]\" value=\"" . $theme["id_theme"] . "\">" . $theme["theme"] . "</label></div>";
         }
         ?>
         <a href="#themes" class="link-add-theme" id="link-add-theme"><i class="fa fa-plus-square-o icon-add-theme" id="icon-add-theme" aria-hidden="true"></i></a>

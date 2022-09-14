@@ -54,14 +54,14 @@ button:focus {
 
 /* Header*/ 
 .ttl-header{
-    padding: 2rem 0;
+    padding: 1rem 0;
     text-align: center;
     color: var(--violet);
 }
 
 .ttl-span{
-    box-shadow: 5px 5px 5px var(--violet);
-    font-size: 3rem;
+    box-shadow: 8px 8px 5px var(--violet);
+    font-size: 2rem;
 }
 
 .list-header{
@@ -75,10 +75,9 @@ button:focus {
 .list-header-items{
     padding: .1rem;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1rem;
     text-align: center;
     border-radius: 10%;
-    text-align: center;
     border: .3rem solid var(--violet);
 }
 
@@ -94,11 +93,12 @@ button:focus {
     flex-direction: column;
     position : relative; 
     width: 90%;
-    margin: 2rem auto;
+    margin: 1rem auto;
     padding: .5rem;
     color: var(--yellow);
     border-radius: 5%;
     background-color: var(--violet);
+
 }
 
 .list-items{
@@ -135,8 +135,9 @@ button:focus {
 
 .paragraph{
     text-align: center;
-    padding: 2rem;
     text-transform: uppercase;
+    padding: 2rem;
+    font-size: 1.5rem;
 }
 
 .link-comments{
@@ -175,6 +176,24 @@ button:focus {
     border: none;
 }
 
+.themes{
+    width: 95%;
+    margin-left: .5rem;
+    border: .1rem solid var(--violet);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    position: relative;
+}
+.legend-themes{
+    padding-top: 1rem;
+    color: var(--violet);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+.label-themes{
+    font-size: .95rem;
+}
 .link-add-theme{
     display: flex;
     align-items: flex-end;
@@ -183,6 +202,12 @@ button:focus {
 
 .icon-add-theme{
     font-size: 1.5rem;
+}
+
+.icon-add-theme{
+    position: absolute;
+    right: .5rem;
+    bottom: .4rem;
 }
 
 .display{
@@ -199,6 +224,11 @@ button:focus {
     font-weight: bold;
     position: absolute;
     right: 1rem;
+}
+
+/*Task Done*/ 
+.come-back{
+    margin-right: 1rem;
 }
 
 @media screen and (min-width: 550px) and (max-width: 899px) {
@@ -237,6 +267,24 @@ button:focus {
     .label-form{
         font-size: 1.3rem;
     }
+    .themes{
+        width: 90%;
+        margin: 0 auto;
+        margin-bottom: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .legend-themes{
+        font-size: 1.3rem;
+    }
+    
+    .label-themes{
+        font-size: 1.2rem;
+    }
+    .icon-add-theme{
+        position: absolute;
+        right: .5rem;
+        bottom: .4rem;
+    }
     
     .submit-form{
         position: relative;
@@ -249,10 +297,10 @@ button:focus {
 
 @media screen and (min-width: 900px) {
     .ttl-header{
-        margin: 1.5rem auto;
+        margin: 1rem auto;
     }
     .ttl-span{
-        font-size: 4rem;
+        font-size: 2.5rem;
 
     }
     .nav-header{
@@ -263,37 +311,55 @@ button:focus {
     }
     .list-header-items{
         padding: .5rem;
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
     .list{
         width: 60%;
     }
     .list-items{
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
+        font-size: 1.3rem;
+        margin-bottom: 1.5rem;
     } 
     .icon{
-        font-size: 1.4rem;
+        font-size: 1rem;
     }
     .date-span{
-        font-size: 1.6rem;
-        padding-left: 1rem;
+        font-size: 1.3rem;
     }
     .taskList-form{
         width: 60%;
-        margin: 0 auto;        
+        margin: 0 auto;
+        padding-bottom: 1rem;        
     }
     .label-form{
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+    .input-form{
+        margin: auto 1rem; 
+        padding: 1rem;
+        border-radius: 8%;
+        border: none;
+        font-size: 1.1rem;
+    }
+    .themes{
+        width: 55%;
+        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        position: relative;
+    }
+    .icon-add-theme{
+        position: absolute;
+        right: .5rem;
+        bottom: .4rem;
+    }
+    .legend-themes{
+        font-size: 1.3rem;
     }
     
-    .input-form{
-        margin-top: .5rem;
-        padding: 1rem;
-        margin-bottom: 2rem;
-        border-radius: 15%;
-        border: none;
-        font-size: 1.6rem;
+    .label-themes{
+        font-size: 1.2rem;
     }
 
     .submit-form{
