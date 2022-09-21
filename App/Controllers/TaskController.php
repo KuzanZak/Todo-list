@@ -3,26 +3,15 @@
 namespace App\Controllers;
 
 use App\Models\Task;
+use App\Models\Theme;
 use App\Views\TaskList;
+use App\Views\Page;
+use App\Views\TaskListForm;
 use App\Views\TaskListItems;
+use App\Views\TaskAdd;
 
 class TaskController
 {
-    // public function index()
-    // {
-    //     $task = new Task;
-    //     $task->getAllNotDone();
-    //     $view = new TaskList([
-    //         'taskList' => implode('', array_map(fn ($t) => "<li class=\"list-items\"><a href=\"action.php?action=done&id_task=" . $t["id_task"] . "\" class=\"list-checkbox\"><i class=\"fa fa-check-square icon\" aria-hidden=\"true\"></i></a>" . $t["description_task"] . "<span class=\"date-span\">" . getDateFromArray($t["date_reminder"]) . "</span>
-    //         <div class = \"list-links\">" . $t["date_reminder"] . " <a href=\"taskListModify.php?action=modify&id_task=" . $t["id_task"] . "\" class=\"link-modify\"><i class=\"fa fa-commenting-o link-comments\" aria-hidden=\"true\"></i></a>
-    //         <a href=\"action.php?action=delete&id_task=" . $t["id_task"] . "\" class=\"link-delete\"><i class=\"fa fa-trash link-comments delete-icon\" aria-hidden=\"true\"></i></a>
-    //         <div class=\"priority-modification\"><a href=\"action.php?action=up&id_task=" . $t["id_task"] . "\" class=\"link-up\"><i class=\"fa fa-caret-up link-comments up-caret\" aria-hidden=\"true\"></i></a>
-    //         <a href=\"action.php?action=down&id_task=" . $t["id_task"] . "\" class=\"link-down\"><i class=\"fa fa-caret-down link-comments down-caret\" aria-hidden=\"true\"></i></a></div></div>
-    //         <div>Thèmes : " . getTheme($t["id_task"]) . "</div></li></li>", $task->getAllNotDone()))
-
-    //     ]);
-    //     $view->display();
-    // }
     public function index()
     {
         $task = new Task;
@@ -38,15 +27,76 @@ class TaskController
             ]);
             $html .= $viewItems->getHTML();
         }
-        // $viewItems->display();
         $view = new TaskList([
             'taskList' => $html
         ]);
-        $view->display();
+
+        $viewPage = new Page([
+            "content" => $view->getHTML()
+        ]);
+        $viewPage->display();
     }
     public function notIndex()
     {
         $task = new Task;
-        return $task->getAllDone();
+        $task->getAllDone();
+        $html = "";
+        foreach ($task->getAllDone() as $task) {
+            $viewItems = new TaskListItems([
+                "idTask" => $task["id_task"],
+                "descriptionTask" => $task["description_task"],
+                "dateFromArray" =>  "",
+                "dateReminder" => "",
+                "themes" => getTheme($task["id_task"])
+            ]);
+            $html .= $viewItems->getHTML();
+        }
+        $view = new TaskList([
+            'taskList' => $html
+        ]);
+        $viewPage = new Page([
+            "content" => $view->getHTML()
+        ]);
+        $viewPage->display();
+    }
+
+    public function create()
+    {
+        $theme = new Theme;
+        $html = "";
+        foreach ($theme->getAll() as $theme) {
+            $html .= "<div class=\"theme-list\"><label class=\"label-themes\"><input type=\"checkbox\" name=\"theme[]\" value=\"" . $theme["id_theme"] . "\">" . $theme["theme"] . "</label></div>";
+        }
+        $viewForm = new TaskListForm([
+            "dateDay" =>  date("Y-m-d"),
+            "themesDisponibles" => $html
+        ]);
+        $viewPage = new Page([
+            "content" => $viewForm->getHTML()
+        ]);
+        $viewPage->display();
+    }
+
+    public function store()
+    {
+        $newTask = new Task;
+        if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($newTask->getAddNewPriority()["priority"])) {
+            $description = strip_tags($_POST["description"]);
+            $date = strip_tags($_POST["date"]);
+            $color = strip_tags($_POST["color"]);
+            $priority = strip_tags($newTask->getAddNewPriority()["priority"]);
+            $priority = intval($priority);
+        } else header('location:index.php?error=1');
+        if (mb_strlen($description) < 255 && $date >= date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($priority)) {
+            $data = [
+                "description" => $description,
+                "date" => $date,
+                "color" => $color,
+                "priority" => $priority,
+                "user" => 1
+            ];
+            $newTask->addTask($data);
+            header('location:index.php');
+        } else header('location:index.php?error=2');
     }
 }

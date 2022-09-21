@@ -18,12 +18,18 @@
                     <a class="header-link" href="index.php">Tâches à effectuer</a>
                 </li>
                 <li class="list-header-items">
-                    <a class="header-link" href="taskList.php">Ajout tâches</a>
+                    <a class="header-link" href="index.php?action=create">Ajout tâches</a>
                 </li>
                 <li class="list-header-items">
-                    <a class="header-link" href="taskDone.php">Tâches effectuées</a>
+                    <a class="header-link" href="index.php?action=done">Tâches effectuées</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <section class="todolist">
+    <section>
+        {{content}}
+    </section>
+<script type="text/javascript" src="js/script.js"></script>
+</body>
+
+</html>

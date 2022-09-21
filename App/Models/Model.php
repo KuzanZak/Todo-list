@@ -7,17 +7,18 @@ use FFI\Exception;
 
 abstract class Model
 {
-    protected PDO $connection;
+    protected static ?PDO $connection = null;
 
     public function __construct()
     {
+        if (self::$connection instanceof PDO) return;
         try {
-            $this->connection = new PDO(
+            self::$connection = new PDO(
                 'mysql:host=localhost;dbname=todolist;charset=utf8',
                 'todolist',
                 'axaLpG9jTP[(pTZE'
             );
-            $this->connection->setAttribute(
+            self::$connection->setAttribute(
                 PDO::ATTR_DEFAULT_FETCH_MODE,
                 PDO::FETCH_ASSOC
             );

@@ -1,0 +1,27 @@
+<form action="index.php" method="post" class="main-taskList-form">
+    <div class="taskList-form">
+        <label for="description" class="label-form">Description : </label>
+        <input class="input-form" type="textarea" name="description" id="description" min="5" maxlength="255">
+    </div>
+    <div class="taskList-form">
+        <label for="date" class="label-form">Date limite : </label>
+        <input class="input-form" type="date" name="date" id="date" min="{{dateDay}}">
+    </div>
+    <div class="taskList-form">
+        <label for="color" class="label-form">Couleur : </label>
+        <input class="input-form" type="text" name="color" id="color" placeholder="Hexadecimal" maxlength="6">
+    </div>
+    <fieldset id="themes" class="themes">
+        <legend class="legend-themes">Choisissez vos thèmes</legend>
+        {{themesDisponibles}}
+        <a href="#themes" class="link-add-theme" id="link-add-theme"><i class="fa fa-plus-square-o icon-add-theme" id="icon-add-theme" aria-hidden="true"></i></a>
+        <div class="add-theme" id="add-theme" hidden>
+            <label><input type="text" name="newtheme" id="newtheme"></label>
+            <button type="button" id="add-button" class="add-button">Ajouter le thème</button>
+        </div>
+    </fieldset>
+    <div class="taskList-form">
+        <input type="hidden" name="action" Value="add">
+        <input type="submit" Value="Ajoutez" class="submit-form">
+    </div>
+</form>
