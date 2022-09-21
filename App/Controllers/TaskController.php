@@ -96,6 +96,14 @@ class TaskController
                 "user" => 1
             ];
             $newTask->addTask($data);
+            //faire une condition si ca a fonctionné
+            $idtask =  Task::getLastId();
+            $addTheme = new Theme;
+            if (isset($_POST["theme"])) {
+                foreach ($_POST["theme"] as $value) {
+                    $addTheme->addTheme($value, $idtask);
+                }
+            }
             header('location:index.php');
         } else header('location:index.php?error=2');
     }

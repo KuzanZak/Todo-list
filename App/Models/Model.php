@@ -27,4 +27,8 @@ abstract class Model
                 " . $e->getMessage());
         };
     }
+    public static function getLastId()
+    {
+        return self::$connection->lastInsertId();
+    }
 }
