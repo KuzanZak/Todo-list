@@ -107,4 +107,16 @@ class TaskController
             header('location:index.php');
         } else header('location:index.php?error=2');
     }
+
+    public function storeDone()
+    {
+        if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "done") {
+            $taskDone = new Task;
+            $data = [
+                'idtask' => $_GET["id_task"],
+                'iduser' => 1,
+            ];
+            return $taskDone->getPriority($data);
+        }
+    }
 }

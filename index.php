@@ -22,6 +22,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'done') {
     $controller->notIndex();
     exit;
 }
+var_dump($controller->storeDone());
 $controller->index();
 // $addTheme = new Theme;
 // if (isset($_POST["theme"])) {
