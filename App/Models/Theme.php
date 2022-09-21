@@ -10,8 +10,17 @@ class Theme extends Model
         $query->execute();
         return $query->fetchAll();
     }
+    public function addTheme(array $data, int $newIdTask): array
+    {
+        $queryT = self::$connection->prepare("INSERT INTO contain(`id_task`, `id_theme`) VALUES ($newIdTask, :value);");
+        $queryT->execute([$data]);
+        return $queryT->fetchAll();
+    }
 }
 
-// foreach ($themes as $theme) {
-//     echo "<div id=\"theme-list\"><label class=\"label-themes\"><input type=\"checkbox\" name=\"theme[]\" value=\"" . $theme["id_theme"] . "\">" . $theme["theme"] . "</label></div>";
-// }
+if (isset($_POST["theme"])) {
+    foreach ($_POST["theme"] as $value) {
+        $queryT = self::$connection->prepare("INSERT INTO contain(`id_task`, `id_theme`) VALUES ($newIdTask, :value);");
+        $queryT->execute([$data]);
+    }
+}

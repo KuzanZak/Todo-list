@@ -5,22 +5,17 @@ namespace App\Controllers;
 use App\Models\Theme;
 use App\Views\TaskListForm;
 
-class ThemeController 
+class ThemeController
 {
-    // public function index()
-    // {
-    //     $theme = new Theme;
-    //     $html = "";
-    //     foreach ($theme->getAll() as $theme) {
-    //         $viewThemes = new TaskListForm([
-    //             "dateDay" =>  date("Y-m-d"),
-    //             "themesDisponibles" => $task["description_task"]
-    //         ]);
-    //         $html .= $viewItems->getHTML();
-    //     }
-    //     // // $viewItems->display();
-    //     // $view = new taskListForm([
-    //     //     'taskList' => $html
-    //     // ]);
-    //     // $view->display();
-    // }
+    public function store()
+    {
+        $addTheme = new Theme;
+        $data = [];
+        if (isset($_POST["theme"])) {
+            foreach ($_POST["theme"] as $value) {
+                $data[] = $_POST["theme"];
+                $addTheme->addTheme($data, $newIdTask);
+            }
+        }
+    }
+}
