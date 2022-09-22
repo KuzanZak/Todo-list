@@ -30,4 +30,16 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete') {
     $controller->storeDelete();
     exit;
 }
+if (isset($_GET['action']) && $_GET['action'] === 'redone') {
+    $controller->storeRedone();
+    exit;
+}
+if (isset($_GET['action']) && $_GET['action'] === 'down') {
+    $controller->storeDown();
+    exit;
+}
+if (isset($_GET['action']) && $_GET['action'] === 'up') {
+    $controller->storeUp();
+    exit;
+}
 $controller->index();

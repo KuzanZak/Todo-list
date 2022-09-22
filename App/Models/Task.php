@@ -23,10 +23,10 @@ class Task extends Model
         return $query->fetchAll();
     }
 
-    public function getAddNewPriority(): array
+    public function getAddNewPriority(): int
     {
         $query = self::$connection->query("SELECT Max(priority) + 1 AS priority FROM task WHERE id_user = 1");
-        return $query->fetch();
+        return $query->fetchColumn();
     }
 
     public function addTask(array $dataSecure): array
@@ -59,6 +59,56 @@ class Task extends Model
     public function deleteTask(array $data): void
     {
         $query =  self::$connection->prepare("DELETE FROM task WHERE id_task = :idtask");
+        $query->execute($data);
+    }
+
+    public function getIdTask(array $data): int
+    {
+        $query =  self::$connection->prepare("SELECT id_task FROM task WHERE id_task = :idtask");
+        $query->execute($data);
+        return $query->fetchColumn();
+    }
+
+    public function updateDone0(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET done = 0 WHERE id_task = :idtask;");
+        $query->execute($data);
+    }
+
+    public function updatePriority(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET priority = :priority WHERE id_task = :idtask;");
+        $query->execute($data);
+    }
+
+    public function updateUpPriority(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET priority = priority - 1 WHERE id_task = :idtask AND done = 0 AND priority <> 1;");
+        $query->execute($data);
+    }
+
+    public function updateUpPrioritySibling(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET priority = priority + 1  WHERE priority  = :priority -1  AND id_user = 1 AND done = 0 AND id_task <> :idtask;");
+        $query->execute($data);
+    }
+
+    public function getMaxPriority(array $data): int
+    {
+        $queryP = self::$connection->prepare("SELECT MAX(priority) FROM task WHERE id_user  = :iduser AND done = 0");
+        $queryP->execute($data);
+        return $queryP->fetchColumn();
+    }
+
+    public function updateDownPriority(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET priority = priority + 1 WHERE id_task = :idtask AND done = 0 AND priority <> :priority");
+        $query->execute($data);
+    }
+
+    public function updateDownPrioritySibling(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET priority = priority - 1  WHERE priority  = :priority + 1  AND id_user = 1 AND done = 0 AND id_task <> :idtask;");
         $query->execute($data);
     }
 }

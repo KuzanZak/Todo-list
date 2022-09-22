@@ -8,7 +8,6 @@ use App\Views\TaskList;
 use App\Views\Page;
 use App\Views\TaskListForm;
 use App\Views\TaskListItems;
-use App\Views\TaskAdd;
 use App\Views\TaskListDone;
 
 class TaskController
@@ -144,5 +143,69 @@ class TaskController
             $taskDelete->updateAllPriority($dataN);
             header('location:index.php');
         } else header('location:index.php?error=nodelete');
+    }
+
+    public function storeRedone()
+    {
+        if (isset($_GET["action"]) && $_GET["action"] === "redone" && isset($_GET["id_task"])) {
+            $taskRedone = new Task;
+            $data = [
+                'idtask' => $_GET["id_task"]
+            ];
+            $taskRedone->updateDone0($data);
+            $priorityRedone = $taskRedone->getAddNewPriority();
+            $dataP = [
+                'priority' => $priorityRedone,
+                'idtask' => $_GET["id_task"]
+            ];
+            $taskRedone->updatePriority($dataP);
+            header('location:index.php');
+        } else header('location:index.php?error=noredone');
+    }
+
+    public function storeUp()
+    {
+        if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "up") {
+            $taskUp = new Task;
+            $data = [
+                'idtask' => $_GET["id_task"],
+                'iduser' => 1
+            ];
+            $dataUp = [
+                'idtask' => $_GET["id_task"]
+            ];
+            $priorityUp = $taskUp->getPriority($data);
+            $dataUpSibling = [
+                'idtask' => $_GET["id_task"],
+                'priority' => $priorityUp
+            ];
+            $taskUp->updateUpPriority($dataUp);
+            $taskUp->updateUpPrioritySibling($dataUpSibling);
+            header('location:index.php');
+        } else header('location:index.php?error=notUp');
+    }
+
+    public function storeDown()
+    {
+        if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "down") {
+            $taskDown = new Task;
+            $data = [
+                'idtask' => $_GET["id_task"],
+                'iduser' => 1
+            ];
+            $priorityDown = $taskDown->getPriority($data);
+            $MaxPriority = $taskDown->getMaxPriority(['iduser' => 1]);
+            $dataDown = [
+                'idtask' => $_GET["id_task"],
+                'priority' => $MaxPriority
+            ];
+            $dataDownSibling = [
+                'idtask' => $_GET["id_task"],
+                'priority' => $priorityDown
+            ];
+            $taskDown->updateDownPriority($dataDown);
+            $taskDown->updateDownPrioritySibling($dataDownSibling);
+            header('location:index.php');
+        } else header('location:index.php?error=notDown');
     }
 }
