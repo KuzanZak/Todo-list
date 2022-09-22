@@ -9,6 +9,7 @@ use App\Views\Page;
 use App\Views\TaskListForm;
 use App\Views\TaskListItems;
 use App\Views\TaskAdd;
+use App\Views\TaskListDone;
 
 class TaskController
 {
@@ -42,12 +43,10 @@ class TaskController
         $task->getAllDone();
         $html = "";
         foreach ($task->getAllDone() as $task) {
-            $viewItems = new TaskListItems([
+            $viewItems = new TaskListDone([
                 "idTask" => $task["id_task"],
                 "descriptionTask" => $task["description_task"],
-                "dateFromArray" =>  "",
-                "dateReminder" => "",
-                "themes" => getTheme($task["id_task"])
+                "dateReminder" => $task["date_reminder"]
             ]);
             $html .= $viewItems->getHTML();
         }

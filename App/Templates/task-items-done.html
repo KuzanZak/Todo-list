@@ -1,22 +1,6 @@
 <li class="list-items">
-    <a href="index.php?action=done&id_task={{idTask}}" class=" list-checkbox"><i
-            class="fa fa-check-square icon" aria-hidden="true"></i>
-    </a>{{descriptionTask}}<span class="date-span">{{dateFromArray}}</span>
-    <div class="list-links">{{dateReminder}}
-        <a href="taskListModify.php?action=modify&id_task={{idTask}}" class=" link-modify">
-            <i class="fa fa-commenting-o link-comments" aria-hidden="true"></i>
-        </a>
-        <a href="index.php?action=delete&id_task={{idTask}}" class="link-delete">
-            <i class="fa fa-trash link-comments delete-icon" aria-hidden="true"></i>
-        </a>
-        <div class="priority-modification">
-            <a href="action.php?action=up&id_task={{idTask}}" class="link-up">
-                <i class="fa fa-caret-up link-comments up-caret\" aria-hidden="true"></i>
-            </a>
-            <a href="action.php?action=down&id_task={{idTask}}" class=" link-down">
-                <i class="fa fa-caret-down link-comments down-caret" aria-hidden="true"></i>
-            </a>
-        </div>
-    </div>
-    <div>Thèmes : {{themes}}</div>
+    <a href="action.php?action=redone&id_task={{idTask}}">
+        <i class="fa fa-undo come-back" aria-hidden="true"></i>
+    </a>{{descriptionTask}}
+    <p>{{dateReminder}} </p>
 </li>
