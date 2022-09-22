@@ -19,14 +19,8 @@ if (isset($_POST['action']) && $_POST['action'] === 'add') {
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'done') {
+    $controller->storeDone();
     $controller->notIndex();
     exit;
 }
-var_dump($controller->storeDone());
 $controller->index();
-// $addTheme = new Theme;
-// if (isset($_POST["theme"])) {
-//     foreach ($_POST["theme"] as $value) {
-//         echo $value;
-//     }
-// }

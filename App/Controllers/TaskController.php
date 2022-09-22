@@ -116,7 +116,13 @@ class TaskController
                 'idtask' => $_GET["id_task"],
                 'iduser' => 1,
             ];
-            return $taskDone->getPriority($data);
-        }
+            $priorityDone = $taskDone->getPriority($data);
+            $taskDone->updatePriorityAndDone($data);
+            $dataN = [
+                'priority' => $priorityDone
+            ];
+            $taskDone->updateAllPriority($dataN);
+            header('location:index.php');
+        } else header('location:index.php?error=getpriority');
     }
 }
