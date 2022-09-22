@@ -55,4 +55,10 @@ class Task extends Model
         $query2 = self::$connection->prepare("UPDATE task SET priority = priority - 1  WHERE priority > :priority AND id_user = 1 AND done = 0");
         $query2->execute($data);
     }
+
+    public function deleteTask(array $data): void
+    {
+        $query =  self::$connection->prepare("DELETE FROM task WHERE id_task = :idtask");
+        $query->execute($data);
+    }
 }

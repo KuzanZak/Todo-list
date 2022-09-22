@@ -23,4 +23,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'done') {
     $controller->notIndex();
     exit;
 }
+if (isset($_GET['action']) && $_GET['action'] === 'delete') {
+    $controller->storeDelete();
+    exit;
+}
 $controller->index();

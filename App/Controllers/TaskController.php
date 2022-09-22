@@ -125,4 +125,25 @@ class TaskController
             header('location:index.php');
         } else header('location:index.php?error=getpriority');
     }
+
+    public function storeDelete()
+    {
+        if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "delete") {
+            $taskDelete = new Task;
+            $data = [
+                'idtask' => $_GET["id_task"],
+                'iduser' => 1
+            ];
+            $priorityDelete = $taskDelete->getPriority($data);
+            $dataD = [
+                'idtask' => $_GET["id_task"]
+            ];
+            $taskDelete->deleteTask($dataD);
+            $dataN = [
+                'priority' => $priorityDelete
+            ];
+            $taskDelete->updateAllPriority($dataN);
+            header('location:index.php');
+        } else header('location:index.php?error=nodelete');
+    }
 }

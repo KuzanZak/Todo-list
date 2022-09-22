@@ -65,14 +65,14 @@ if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "do
     exit;
 };
 
-if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "delete") {
-    $query =  $dbCo->prepare("DELETE FROM task WHERE id_task = :idtask");
-    $query->execute([
-        "idtask" => $_GET["id_task"]
-    ]);
-    header("location:index.php");
-    exit;
-};
+// if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "delete") {
+//     $query =  $dbCo->prepare("DELETE FROM task WHERE id_task = :idtask");
+//     $query->execute([
+//         "idtask" => $_GET["id_task"]
+//     ]);
+//     header("location:index.php");
+//     exit;
+// };
 
 if (isset($_GET["action"]) && $_GET["action"] === "redone" && isset($_GET["id_task"])) {
     $query =  $dbCo->prepare("SELECT id_task FROM task WHERE id_task = :idtask");
