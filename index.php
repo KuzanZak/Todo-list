@@ -4,9 +4,13 @@ spl_autoload_register();
 require_once "includes/_functions.php";
 
 use App\Controllers\TaskController;
-use App\Controllers\ThemeController;
 use App\Models\Task;
-use App\Models\Theme;
+
+// $task = new Task;
+// $dataTask = $task->getIdThemFromIdTask(["idtask" => 8]);
+// foreach ($dataTask as $theme) {
+//     var_dump($theme["id_theme"]);
+// }
 
 $controller = new TaskController();
 
@@ -40,6 +44,14 @@ if (isset($_GET['action']) && $_GET['action'] === 'down') {
 }
 if (isset($_GET['action']) && $_GET['action'] === 'up') {
     $controller->storeUp();
+    exit;
+}
+if (isset($_GET['action']) && $_GET['action'] === 'createmodify') {
+    $controller->createModify();
+    exit;
+}
+if (isset($_POST['action']) && $_POST['action'] === 'modify') {
+    $controller->updateModify();
     exit;
 }
 $controller->index();

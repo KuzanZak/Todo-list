@@ -1,15 +1,15 @@
 <form action="index.php" method="post" class="main-taskList-form">
     <div class="taskList-form">
         <label for="description" class="label-form">Description : </label>
-        <input class="input-form" type="textarea" name="description" id="description" min="5" maxlength="255">
+        <input class="input-form" type="textarea" name="description" id="description" min="5" maxlength="255" value="{{description}}">
     </div>
     <div class="taskList-form">
         <label for="date" class="label-form">Date limite : </label>
-        <input class="input-form" type="date" name="date" id="date" min="{{dateDay}}">
+        <input class="input-form" type="date" name="date" id="date" min="{{dateDay}}" value="{{datereminder}}">
     </div>
     <div class="taskList-form">
         <label for="color" class="label-form">Couleur : </label>
-        <input class="input-form" type="text" name="color" id="color" placeholder="Hexadecimal" maxlength="6">
+        <input class="input-form" type="text" name="color" id="color" placeholder="Hexadecimal" maxlength="6" value="{{color}}">
     </div>
     <fieldset id="themes" class="themes">
         <legend class="legend-themes">Choisissez vos thèmes</legend>
@@ -21,7 +21,8 @@
         </div>
     </fieldset>
     <div class="taskList-form">
-        <input type="hidden" name="action" Value="add">
+        <input type="hidden" name="action" Value="{{action}}">
+        <input type="hidden" name="id_task" id="id_task" Value="{{idtask}}">
         <input type="submit" Value="Ajoutez" class="submit-form">
     </div>
 </form>

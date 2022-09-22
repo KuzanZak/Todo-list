@@ -60,6 +60,8 @@ class Task extends Model
     {
         $query =  self::$connection->prepare("DELETE FROM task WHERE id_task = :idtask");
         $query->execute($data);
+        $queryT =  self::$connection->prepare("DELETE FROM contain WHERE id_task = :idtask");
+        $queryT->execute($data);
     }
 
     public function getIdTask(array $data): int
@@ -95,14 +97,14 @@ class Task extends Model
 
     public function getMaxPriority(array $data): int
     {
-        $queryP = self::$connection->prepare("SELECT MAX(priority) FROM task WHERE id_user  = :iduser AND done = 0");
+        $queryP = self::$connection->prepare("SELECT MAX(priority) FROM task WHERE id_user  = :iduser AND done = 0;");
         $queryP->execute($data);
         return $queryP->fetchColumn();
     }
 
     public function updateDownPriority(array $data)
     {
-        $query =  self::$connection->prepare("UPDATE task SET priority = priority + 1 WHERE id_task = :idtask AND done = 0 AND priority <> :priority");
+        $query =  self::$connection->prepare("UPDATE task SET priority = priority + 1 WHERE id_task = :idtask AND done = 0 AND priority <> :priority;");
         $query->execute($data);
     }
 
@@ -110,5 +112,25 @@ class Task extends Model
     {
         $query =  self::$connection->prepare("UPDATE task SET priority = priority - 1  WHERE priority  = :priority + 1  AND id_user = 1 AND done = 0 AND id_task <> :idtask;");
         $query->execute($data);
+    }
+
+    public function getAllDatasFromATask(array $data): array
+    {
+        $queryA = self::$connection->prepare("SELECT `id_task`, `description_task`, `date_reminder`, `color`, `priority` FROM task WHERE id_task = :idtask;");
+        $queryA->execute($data);
+        return $queryA->fetch();
+    }
+
+    public function updateAllDatasFromATask(array $data)
+    {
+        $query =  self::$connection->prepare("UPDATE task SET `description_task` = :description, `date_reminder` = :date, `color` = :color WHERE id_task = :idtask;");
+        $query->execute($data);
+    }
+
+    public function getIdThemFromIdTask(array $data): array
+    {
+        $queryA = self::$connection->prepare("SELECT id_theme FROM contain WHERE id_task = :idtask;");
+        $queryA->execute($data);
+        return $queryA->fetchAll();
     }
 }

@@ -67,7 +67,12 @@ class TaskController
         }
         $viewForm = new TaskListForm([
             "dateDay" =>  date("Y-m-d"),
-            "themesDisponibles" => $html
+            "themesDisponibles" => $html,
+            "description" => "",
+            "datereminder" => "",
+            "color" => "",
+            "idtask" => "",
+            "action" => "add"
         ]);
         $viewPage = new Page([
             "content" => $viewForm->getHTML()
@@ -207,5 +212,68 @@ class TaskController
             $taskDown->updateDownPrioritySibling($dataDownSibling);
             header('location:index.php');
         } else header('location:index.php?error=notDown');
+    }
+
+
+    public function createModify()
+    {
+        if (isset($_GET["action"]) && $_GET["action"] === "createmodify" && isset($_GET["id_task"])) {
+            $theme = new Theme;
+            $task = new Task;
+            $idtask = strip_tags($_GET["id_task"]);
+            $idtask = intval($idtask);
+            $dataTask = $task->getAllDatasFromATask(['idtask' => $idtask]);
+            $themesTask = $task->getIdThemFromIdTask(['idtask' => $idtask]);
+            $html = "";
+            $allIdThemeFromIdTask = [];
+            foreach ($themesTask as $themeT) {
+                $allIdThemeFromIdTask[] = $themeT["id_theme"];
+            }
+            foreach ($theme->getAll() as $themeDb) {
+                if (in_array($themeDb["id_theme"], $allIdThemeFromIdTask)) {
+                    $html .= "<div class=\"theme-list\"><label class=\"label-themes\"><input type=\"checkbox\" name=\"theme[]\" value=\"" . $themeDb["id_theme"] . "\" checked>" . $themeDb["theme"] . "</label></div>";
+                } else $html .= "<div class=\"theme-list\"><label class=\"label-themes\"><input type=\"checkbox\" name=\"theme[]\" value=\"" . $themeDb["id_theme"] . "\">" . $themeDb["theme"] . "</label></div>";
+            }
+
+            $viewForm = new TaskListForm([
+                "dateDay" =>  date("Y-m-d"),
+                "themesDisponibles" => $html,
+                "description" => $dataTask["description_task"],
+                "datereminder" => $dataTask["date_reminder"],
+                "color" => $dataTask["color"],
+                "idtask" => $dataTask["id_task"],
+                "action" => "modify"
+            ]);
+            $viewPage = new Page([
+                "content" => $viewForm->getHTML()
+            ]);
+            $viewPage->display();
+        }
+    }
+    public function updateModify()
+    {
+        $theme = new Theme;
+        $task = new Task;
+        if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($_POST["id_task"])) {
+            $newdescription = strip_tags($_POST["description"]);
+            $newdate = strip_tags($_POST["date"]);
+            $newcolor = strip_tags($_POST["color"]);
+            if (mb_strlen($newdescription) < 255 && $newdate >= date("Y-m-d") && ctype_xdigit($newcolor) && mb_strlen($newcolor) == 6) {
+                $task->updateAllDatasFromATask([
+                    "description" => $newdescription,
+                    "date" => $newdate,
+                    "color" => $newcolor,
+                    "idtask" => $_POST["id_task"]
+                ]);
+            }
+        };
+        $idtask =  $_POST["id_task"];
+        if (isset($_POST["theme"])) {
+            $theme->deleteThemes($idtask);
+            foreach ($_POST["theme"] as $value) {
+                $theme->addTheme($value, $idtask);
+            }
+            header('location:index.php');
+        } else header('location:index.php?error=notUpdate');
     }
 }

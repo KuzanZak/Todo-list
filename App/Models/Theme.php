@@ -12,8 +12,14 @@ class Theme extends Model
     }
     public function addTheme(int $value, int $newIdTask): array
     {
-        $queryT = self::$connection->prepare("INSERT INTO contain(`id_task`, `id_theme`) VALUES ($newIdTask, :value);");
-        $queryT->execute(['value' => $value]);
+        $queryT = self::$connection->prepare("INSERT INTO contain(`id_task`, `id_theme`) VALUES (:idtask, :value);");
+        $queryT->execute(['value' => $value, 'idtask' => $newIdTask]);
         return $queryT->fetchAll();
+    }
+
+    public function deleteThemes(int $idtask): void
+    {
+        $queryT =  self::$connection->prepare("DELETE FROM contain WHERE id_task = :idtask");
+        $queryT->execute(["idtask" => $idtask]);
     }
 }
