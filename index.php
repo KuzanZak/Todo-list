@@ -18,9 +18,12 @@ if (isset($_POST['action']) && $_POST['action'] === 'add') {
     $controller->store();
     exit;
 }
+if (isset($_GET['action']) && $_GET['action'] === 'taskDone') {
+    $controller->notIndex();
+    exit;
+}
 if (isset($_GET['action']) && $_GET['action'] === 'done') {
     $controller->storeDone();
-    $controller->notIndex();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
