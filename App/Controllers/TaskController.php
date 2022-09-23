@@ -6,6 +6,7 @@ use App\Models\Task;
 use App\Models\Theme;
 use App\Views\TaskList;
 use App\Views\Page;
+use App\Views\Error;
 use App\Views\TaskListForm;
 use App\Views\TaskListItems;
 use App\Views\TaskListDone;
@@ -60,6 +61,14 @@ class TaskController
 
     public function create()
     {
+        if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], "http://localhost/todo_list")) {
+            $viewPageError = new Error([
+                "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
+
+            ]);
+            $viewPageError->display();
+            return;
+        }
         $theme = new Theme;
         $html = "";
         foreach ($theme->getAll() as $theme) {
