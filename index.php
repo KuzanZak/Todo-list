@@ -54,4 +54,12 @@ if (isset($_POST['action']) && $_POST['action'] === 'modify') {
     $controller->updateModify();
     exit;
 }
+if (isset($_GET['error']) && $_GET['error'] === 'csrfReferer') {
+    $controller->errorReferor();
+    exit;
+}
+if (isset($_GET['error']) && $_GET['error'] === 'csrfToken') {
+    $controller->errorToken();
+    exit;
+}
 $controller->index();

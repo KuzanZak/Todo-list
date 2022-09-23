@@ -59,15 +59,19 @@ class TaskController
         $viewPage->display();
     }
 
+    public function errorReferor()
+    {
+        $viewPageError = new Error([
+            "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
+
+        ]);
+        $viewPageError->display();
+    }
+
     public function create()
     {
         if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], "http://localhost/todo_list")) {
-            // $viewPageError = new Error([
-            //     "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
-
-            // ]);
-            // $viewPageError->display();
-            header("location:index.php?error=csrf");
+            header("location:index.php?error=csrfReferer");
             exit;
         }
         session_start();
@@ -94,19 +98,22 @@ class TaskController
         $viewPage->display();
     }
 
+    public function errorToken()
+    {
+        $viewPageError = new Error([
+            "error" => "Vous n'êtes pas l'utilisateur qui a ouvert ce formulaire donc veuillez rendre ce qui n'est pas à vous ;)"
+
+        ]);
+        $viewPageError->display();
+    }
+
     public function store()
     {
         $newTask = new Task;
         session_start();
-        // var_dump(isset($_POST["description"]), isset($_POST["date"]), isset($_POST["color"]), $_SESSION['myToken'] == $_POST['token']);
-        // exit;
-        if (!isset($_SESSION['myToken']) || !isset($_POST['token']) || $_SESSION['myToken'] !== $_POST['token']) {
-            // $viewPageError = new Error([
-            //     "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
 
-            // ]);
-            // $viewPageError->display();
-            header("location:index.php?error=csrf");
+        if (!isset($_SESSION['myToken']) || !isset($_POST['token']) || $_SESSION['myToken'] !== $_POST['token']) {
+            header("location:index.php?error=csrfToken");
             exit;
         }
         if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"])) {
@@ -115,8 +122,7 @@ class TaskController
             $color = strip_tags($_POST["color"]);
             $priority = $newTask->getAddNewPriority();
         } else header('location:index.php?error=1');
-        // var_dump(mb_strlen($description) < 255, $date >= date("Y-m-d"), ctype_xdigit($color), mb_strlen($color) == 6, is_int($priority));
-        // exit;
+
         if (mb_strlen($description) < 255 && $date >= date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6) {
             $data = [
                 "description" => $description,
