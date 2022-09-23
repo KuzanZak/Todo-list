@@ -62,13 +62,17 @@ class TaskController
     public function create()
     {
         if (!isset($_SERVER['HTTP_REFERER']) || !str_contains($_SERVER['HTTP_REFERER'], "http://localhost/todo_list")) {
-            $viewPageError = new Error([
-                "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
+            // $viewPageError = new Error([
+            //     "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
 
-            ]);
-            $viewPageError->display();
-            return;
+            // ]);
+            // $viewPageError->display();
+            header("location:index.php?error=csrf");
+            exit;
         }
+        session_start();
+        $_SESSION["myToken"] = md5(uniqid(mt_rand(), true));
+
         $theme = new Theme;
         $html = "";
         foreach ($theme->getAll() as $theme) {
@@ -81,7 +85,8 @@ class TaskController
             "datereminder" => "",
             "color" => "",
             "idtask" => "",
-            "action" => "add"
+            "action" => "add",
+            "myToken" => $_SESSION["myToken"]
         ]);
         $viewPage = new Page([
             "content" => $viewForm->getHTML()
@@ -92,14 +97,27 @@ class TaskController
     public function store()
     {
         $newTask = new Task;
-        if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"]) && isset($newTask->getAddNewPriority()["priority"])) {
+        session_start();
+        // var_dump(isset($_POST["description"]), isset($_POST["date"]), isset($_POST["color"]), $_SESSION['myToken'] == $_POST['token']);
+        // exit;
+        if (!isset($_SESSION['myToken']) || !isset($_POST['token']) || $_SESSION['myToken'] !== $_POST['token']) {
+            // $viewPageError = new Error([
+            //     "error" => "Veuillez ouvrir le formulaire en étant sur le site de votre ToDoList! Merci de votre compréhension :)"
+
+            // ]);
+            // $viewPageError->display();
+            header("location:index.php?error=csrf");
+            exit;
+        }
+        if (isset($_POST["description"]) && isset($_POST["date"]) && isset($_POST["color"])) {
             $description = strip_tags($_POST["description"]);
             $date = strip_tags($_POST["date"]);
             $color = strip_tags($_POST["color"]);
-            $priority = strip_tags($newTask->getAddNewPriority()["priority"]);
-            $priority = intval($priority);
+            $priority = $newTask->getAddNewPriority();
         } else header('location:index.php?error=1');
-        if (mb_strlen($description) < 255 && $date >= date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6 && is_int($priority)) {
+        // var_dump(mb_strlen($description) < 255, $date >= date("Y-m-d"), ctype_xdigit($color), mb_strlen($color) == 6, is_int($priority));
+        // exit;
+        if (mb_strlen($description) < 255 && $date >= date("Y-m-d") && ctype_xdigit($color) && mb_strlen($color) == 6) {
             $data = [
                 "description" => $description,
                 "date" => $date,
@@ -110,14 +128,15 @@ class TaskController
             $newTask->addTask($data);
             //faire une condition si ca a fonctionné
             $idtask =  Task::getLastId();
-            $addTheme = new Theme;
-            if (isset($_POST["theme"])) {
-                foreach ($_POST["theme"] as $value) {
-                    $addTheme->addTheme($value, $idtask);
-                }
+        } else header('location:index.php?error=2');
+
+        $addTheme = new Theme;
+        if (isset($_POST["theme"])) {
+            foreach ($_POST["theme"] as $value) {
+                $addTheme->addTheme($value, $idtask);
             }
             header('location:index.php');
-        } else header('location:index.php?error=2');
+        } else header('location:index.php?error=3');
     }
 
     public function storeDone()
@@ -251,7 +270,8 @@ class TaskController
                 "datereminder" => $dataTask["date_reminder"],
                 "color" => $dataTask["color"],
                 "idtask" => $dataTask["id_task"],
-                "action" => "modify"
+                "action" => "modify",
+                "myToken" => ""
             ]);
             $viewPage = new Page([
                 "content" => $viewForm->getHTML()
