@@ -25,7 +25,8 @@ class TaskController
                 "dateFromArray" =>  getDateFromArray($task["date_reminder"]),
                 "dateReminder" => $task["date_reminder"],
                 "themes" => getTheme($task["id_task"]),
-                "idsTheme" => getThemeByIdTheme($task["id_task"])
+                "idsTheme" => getThemeByIdTheme($task["id_task"]),
+                "dataColor" =>  $task["color"]
             ]);
             $html .= $viewItems->getHTML();
         }

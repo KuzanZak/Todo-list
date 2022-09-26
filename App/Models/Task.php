@@ -6,7 +6,7 @@ class Task extends Model
 {
     public function getAllNotDone(): array
     {
-        $query = self::$connection->prepare("SELECT id_task, description_task, date_reminder FROM task WHERE done = :done AND id_user  = :iduser ORDER BY priority ASC");
+        $query = self::$connection->prepare("SELECT id_task, description_task, date_reminder, color FROM task WHERE done = :done AND id_user  = :iduser ORDER BY priority ASC");
         $query->execute([
             "done" => 0,
             "iduser" => 1
