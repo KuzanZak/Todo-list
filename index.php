@@ -6,7 +6,6 @@ require_once "includes/_functions.php";
 use App\Controllers\TaskController;
 use App\Controllers\ThemeController;
 
-
 $controllerTask = new TaskController();
 $controllerTheme = new ThemeController();
 
@@ -19,35 +18,35 @@ if (isset($_POST['action']) && $_POST['action'] === 'add') {
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'taskDone') {
-    $controllerTask->notIndex();
+    $controllerTask->historicTaskDone();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'done') {
-    $controllerTask->storeDone();
+    $controllerTask->putTaskDone();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
-    $controllerTask->storeDelete();
+    $controllerTask->deleteTask();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'redone') {
-    $controllerTask->storeRedone();
+    $controllerTask->putTaskNotDone();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'down') {
-    $controllerTask->storeDown();
+    $controllerTask->downPriorityFromTask();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'up') {
-    $controllerTask->storeUp();
+    $controllerTask->upPriorityFromTask();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'createmodify') {
-    $controllerTask->createModify();
+    $controllerTask->modifyTask();
     exit;
 }
 if (isset($_POST['action']) && $_POST['action'] === 'modify') {
-    $controllerTask->updateModify();
+    $controllerTask->saveModify();
     exit;
 }
 if (isset($_GET['error']) && $_GET['error'] === 'csrfReferer') {

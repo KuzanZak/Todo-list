@@ -160,6 +160,7 @@ button:focus {
     color: var(--yellow);
     margin-left: 1rem;
     margin-top: 1rem;
+    border-radius: 1rem;
 }
 
 .list-themes {
@@ -232,6 +233,20 @@ button:focus {
     bottom: .4rem;
 }
 
+.add-theme{
+    width: 100%;
+}
+.add-input{
+    width: 100%;
+}
+.add-button{
+    width: 50%;
+    background: none;
+    border: none;
+    background-color: var(--violet);
+    color: var(--yellow);
+}
+
 .display{
     display: flex;
 }
@@ -279,6 +294,9 @@ button:focus {
     .list-items{
         font-size: 1.2rem;
     }
+    .theme-items{
+        margin-left: 2rem;
+    }
     .taskList-form{
         width: 95%;
         margin: 0 auto;
@@ -294,6 +312,15 @@ button:focus {
         margin: 0 auto;
         margin-bottom: 1rem;
         grid-template-columns: repeat(3, 1fr);
+    }
+    .add-theme{
+        width: 80%;
+    }
+    .add-input{
+        width: 100%;
+    }
+    .add-button{
+        width: 40%;
     }
     .legend-themes{
         font-size: 1.3rem;
@@ -342,6 +369,11 @@ button:focus {
         font-size: 1.3rem;
         margin-bottom: 1.5rem;
     } 
+    .theme-items{
+        margin-top: 0;
+        margin-left: 3rem;
+        padding: .5rem;
+    }
     .icon{
         font-size: 1rem;
     }
@@ -382,6 +414,16 @@ button:focus {
     
     .label-themes{
         font-size: 1.2rem;
+    }
+
+    .add-theme{
+        width: 80%;
+    }
+    .add-input{
+        width: 100%;
+    }
+    .add-button{
+        width: 40%;
     }
 
     .submit-form{

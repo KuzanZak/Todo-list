@@ -1,4 +1,4 @@
-<form action="index.php" method="post" class="main-taskList-form">
+<form action="index.php" method="post">
     <div class="taskList-form">
         <label for="description" class="label-form">Description : </label>
         <input class="input-form" type="textarea" name="description" id="description" min="5" maxlength="255" value="{{description}}">
@@ -15,9 +15,9 @@
         <legend class="legend-themes">Choisissez vos thèmes</legend>
         {{themesDisponibles}}
         <a href="#themes" class="link-add-theme" id="link-add-theme"><i class="fa fa-plus-square-o icon-add-theme" id="icon-add-theme" aria-hidden="true"></i></a>
-        <div class="add-theme" id="add-theme" hidden>
-            <label><input type="text" name="newtheme" id="newtheme"></label>
-            <input type="button" id="add-button" name="action" class="add-button" value="Ajoutez le thème">
+        <div id="add-theme" hidden class="add-theme">
+            <label><input type="text" name="newtheme" id="newtheme" class="add-input"></label>
+            <input type="button" id="add-button" name="action" class="add-button" value="Ajout">
         </div>
     </fieldset>
     <div class="taskList-form">

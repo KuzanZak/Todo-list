@@ -5,7 +5,6 @@ namespace App\Views;
 class View
 {
     protected static string $filename;
-    // protected static string $template;
     private array $data;
 
     public function __construct(array $data)
@@ -30,7 +29,6 @@ class View
     }
 
     // Methods
-
     public function getContent(): string|false
     {
         // if(empty(static::$template)) static::$template =file_get_contents($this->getFilename());

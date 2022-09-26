@@ -52,7 +52,7 @@ class TaskController
         ]);
         $viewPage->display();
     }
-    public function notIndex()
+    public function historicTaskDone()
     {
         $task = new Task;
         $task->getAllDone();
@@ -161,7 +161,7 @@ class TaskController
         } else header('location:index.php?error=3');
     }
 
-    public function storeDone()
+    public function putTaskDone()
     {
         if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "done") {
             $taskDone = new Task;
@@ -179,7 +179,7 @@ class TaskController
         } else header('location:index.php?error=getpriority');
     }
 
-    public function storeDelete()
+    public function deleteTask()
     {
         if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "delete") {
             $taskDelete = new Task;
@@ -200,7 +200,7 @@ class TaskController
         } else header('location:index.php?error=nodelete');
     }
 
-    public function storeRedone()
+    public function putTaskNotDone()
     {
         if (isset($_GET["action"]) && $_GET["action"] === "redone" && isset($_GET["id_task"])) {
             $taskRedone = new Task;
@@ -218,7 +218,7 @@ class TaskController
         } else header('location:index.php?error=noredone');
     }
 
-    public function storeUp()
+    public function upPriorityFromTask()
     {
         if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "up") {
             $taskUp = new Task;
@@ -240,7 +240,7 @@ class TaskController
         } else header('location:index.php?error=notUp');
     }
 
-    public function storeDown()
+    public function downPriorityFromTask()
     {
         if (isset($_GET["action"]) && isset($_GET["id_task"]) && $_GET["action"] === "down") {
             $taskDown = new Task;
@@ -265,7 +265,7 @@ class TaskController
     }
 
 
-    public function createModify()
+    public function modifyTask()
     {
         if (isset($_GET["action"]) && $_GET["action"] === "createmodify" && isset($_GET["id_task"])) {
             $theme = new Theme;
@@ -301,7 +301,7 @@ class TaskController
             $viewPage->display();
         }
     }
-    public function updateModify()
+    public function saveModify()
     {
         $theme = new Theme;
         $task = new Task;
