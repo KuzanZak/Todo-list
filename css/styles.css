@@ -153,6 +153,25 @@ button:focus {
 .come-back{
     color: var(--yellow);
 }
+
+.theme-items{
+    background-color: var(--violet);
+    color: var(--yellow);
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.list-themes {
+    display: flex;
+    flex-direction: row;
+}
+
+.hidden{
+    display: none;
+}
+.displayB{
+    display: block;
+}
 /* Formulaire*/ 
 .taskList-form{
     display: grid;

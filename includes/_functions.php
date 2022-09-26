@@ -83,15 +83,21 @@ function getTheme(int $idtask): string
         die("Unable to connect to the database.
             " . $e->getMessage());
     };
-
-    $queryTD = $dbCo->prepare("SELECT GROUP_CONCAT(' ', theme_name) as themes FROM contain JOIN theme USING(id_theme) WHERE id_task = :idtask;");
+    // SELECT GROUP_CONCAT(' ', theme_name) as themes, id_theme FROM contain JOIN theme USING(id_theme) WHERE id_task = :idtask;
+    $queryTD = $dbCo->prepare("SELECT theme_name as theme, id_theme FROM theme JOIN contain USING(id_theme) WHERE id_task = :idtask;");
     $queryTD->execute([
         "idtask" => $idtask
     ]);
-    $queryTDID = $queryTD->fetch();
+    $queryTDID = $queryTD->fetchAll();
     $text = "";
-    if (!empty($queryTDID["themes"])) {
-        $text .= $queryTDID["themes"];
+    $i = 0;
+    foreach ($queryTDID as $themeQ) {
+        if (!empty($themeQ["theme"])) {
+            if ($i < (sizeof($queryTDID) - 1)) {
+                $i++;
+                $text .= "<p class=\"themes-list-task\" id=\"" . $themeQ["id_theme"] . "\">" . $themeQ["theme"] . "/</p>";
+            } else $text .= "<p class=\"themes-list-task\" id=\"" . $themeQ["id_theme"] . "\">" . $themeQ["theme"] . "</p>";
+        }
     }
     return $text;
 }

@@ -23,6 +23,16 @@ class Task extends Model
         return $query->fetchAll();
     }
 
+    public function getTasksByIdTheme(): array
+    {
+        $query = self::$connection->prepare("SELECT id_task, description_task, date_reminder JOIN contain c USING(id_task) FROM task WHERE done = :done AND id_user  = :iduser AND id_task = c.id_task ORDER BY priority ASC");
+        $query->execute([
+            "done" => 0,
+            "iduser" => 1
+        ]);
+        return $query->fetchAll();
+    }
+
     public function getAddNewPriority(): int
     {
         $query = self::$connection->query("SELECT Max(priority) + 1 AS priority FROM task WHERE id_user = 1");

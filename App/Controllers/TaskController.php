@@ -10,13 +10,13 @@ use App\Views\Error;
 use App\Views\TaskListForm;
 use App\Views\TaskListItems;
 use App\Views\TaskListDone;
+use App\Views\ThemeList;
 
 class TaskController
 {
     public function index()
     {
         $task = new Task;
-        $task->getAllNotDone();
         $html = "";
         foreach ($task->getAllNotDone() as $task) {
             $viewItems = new TaskListItems([
@@ -28,8 +28,21 @@ class TaskController
             ]);
             $html .= $viewItems->getHTML();
         }
+        $theme = new Theme;
+        $html1 = "";
+        foreach ($theme->getAll() as $oneTheme) {
+            // var_dump($oneTheme["theme"]);
+            $viewThemes = new ThemeList([
+                "value" => $oneTheme["id_theme"],
+                "name" => $oneTheme["theme"],
+                "data-id" => $oneTheme["id_theme"]
+            ]);
+            $html1 .= $viewThemes->getHTML();
+            // var_dump($html1);
+        };
         $view = new TaskList([
-            'taskList' => $html
+            'taskList' => $html,
+            'filterTheme' => $html1
         ]);
 
         $viewPage = new Page([
@@ -51,7 +64,8 @@ class TaskController
             $html .= $viewItems->getHTML();
         }
         $view = new TaskList([
-            'taskList' => $html
+            'taskList' => $html,
+            'filterTheme' => ''
         ]);
         $viewPage = new Page([
             "content" => $view->getHTML()
