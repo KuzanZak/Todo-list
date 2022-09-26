@@ -1,46 +1,26 @@
-// document.querySelectorAll(".themes-items-option").forEach(function (element) {
-//     // console.log(element);
-//     element.addEventListener("click", function(e){
-//         // console.log(this);
+// function filter(int) {
+//     document.querySelectorAll(".themes-list-task").forEach(function (themeTask) {
+//         console.log(themeTask);
+//         div = themeTask.parentElement;
+//         div.parentElement.classList.add("hidden");
+//         if(themeTask.getAttribute("id") == int) {
+//             div.parentElement.classList.remove("hidden");
+//         }
 //     });
-// });
-
+// }
 function filter(int) {
-    $themes = [];
-    document.querySelectorAll(".themes-list-task").forEach(function (themeTask) {
-        div = themeTask.parentElement;
-        div.parentElement.classList.add("hidden");
-        if(themeTask.getAttribute("id") == int) {
-            div.parentElement.classList.toggle("displayB");
+    document.querySelectorAll(".list-items").forEach(function (list) {
+        const array = list.getAttribute("data-theme").split(",");
+        console.log(array);
+        list.classList.add("hidden");
+        if(array.includes(int)){
+            list.classList.remove("hidden");
         }
     });
 }
 document.getElementById("theme-items").addEventListener("change", function(e){
     filter(this.value);
 });
-
-
-document.querySelectorAll(".themes-list-task").forEach(function (themeTask) {
-    // console.log(themeTask.getAttribute("id"));
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // document.getElementById("icon-add-theme").addEventListener("click", function(e) {
 //     document.getElementById("add-theme").classList.toggle("display");
@@ -63,9 +43,9 @@ async function asynAction() {
     }
 }
 
-function addTheme(themeName, idtheme){
-    document.getElementById("themes").innerHTML += `<label><input type="checkbox" name="theme[]" value=${idtheme}>${themeName}<label>`
-}
+// function addTheme(themeName, idtheme){
+//     document.getElementById("themes").innerHTML += `<label><input type="checkbox" name="theme[]" value=${idtheme}>${themeName}<label>`
+// }
 
 // document.getElementById("add-button").addEventListener("click", function(event){
 //     asynAction();

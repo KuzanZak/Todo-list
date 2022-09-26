@@ -101,6 +101,33 @@ function getTheme(int $idtask): string
     }
     return $text;
 }
+function getThemeByIdTheme(int $idtask): string
+{
+    try {
+        $dbCo = new PDO(
+            'mysql:host=localhost;dbname=todolist;charset=utf8',
+            'todolist',
+            'axaLpG9jTP[(pTZE'
+        );
+        $dbCo->setAttribute(
+            PDO::ATTR_DEFAULT_FETCH_MODE,
+            PDO::FETCH_ASSOC
+        );
+    } catch (Exception $e) {
+        die("Unable to connect to the database.
+            " . $e->getMessage());
+    };
+    $queryTD = $dbCo->prepare("SELECT theme_name as theme, id_theme FROM theme JOIN contain USING(id_theme) WHERE id_task = :idtask;");
+    $queryTD->execute([
+        "idtask" => $idtask
+    ]);
+    $queryTDID = $queryTD->fetchAll();
+    $text = "";
+    foreach ($queryTDID as $themeQ) {
+        $text .= "" . $themeQ["id_theme"] . ",";
+    }
+    return $text;
+}
 
 
 function getDateFromArray(string $date): string
