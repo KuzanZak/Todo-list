@@ -4,62 +4,58 @@ spl_autoload_register();
 require_once "includes/_functions.php";
 
 use App\Controllers\TaskController;
-use App\Models\Task;
+use App\Controllers\ThemeController;
 
-// $task = new Task;
-// $dataTask = $task->getIdThemFromIdTask(["idtask" => 8]);
-// foreach ($dataTask as $theme) {
-//     var_dump($theme["id_theme"]);
-// }
 
-$controller = new TaskController();
+$controllerTask = new TaskController();
+$controllerTheme = new ThemeController();
 
 if (isset($_GET['action']) && $_GET['action'] === 'create') {
-    $controller->create();
+    $controllerTask->create();
     exit;
 }
 if (isset($_POST['action']) && $_POST['action'] === 'add') {
-    $controller->store();
+    $controllerTask->store();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'taskDone') {
-    $controller->notIndex();
+    $controllerTask->notIndex();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'done') {
-    $controller->storeDone();
+    $controllerTask->storeDone();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'delete') {
-    $controller->storeDelete();
+    $controllerTask->storeDelete();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'redone') {
-    $controller->storeRedone();
+    $controllerTask->storeRedone();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'down') {
-    $controller->storeDown();
+    $controllerTask->storeDown();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'up') {
-    $controller->storeUp();
+    $controllerTask->storeUp();
     exit;
 }
 if (isset($_GET['action']) && $_GET['action'] === 'createmodify') {
-    $controller->createModify();
+    $controllerTask->createModify();
     exit;
 }
 if (isset($_POST['action']) && $_POST['action'] === 'modify') {
-    $controller->updateModify();
+    $controllerTask->updateModify();
     exit;
 }
 if (isset($_GET['error']) && $_GET['error'] === 'csrfReferer') {
-    $controller->errorReferor();
+    $controllerTask->errorReferor();
     exit;
 }
 if (isset($_GET['error']) && $_GET['error'] === 'csrfToken') {
-    $controller->errorToken();
+    $controllerTask->errorToken();
     exit;
 }
-$controller->index();
+$controllerTask->index();

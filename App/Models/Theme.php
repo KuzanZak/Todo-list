@@ -10,7 +10,7 @@ class Theme extends Model
         $query->execute();
         return $query->fetchAll();
     }
-    public function addTheme(int $value, int $newIdTask): array
+    public function addThemeForATask(int $value, int $newIdTask): array
     {
         $queryT = self::$connection->prepare("INSERT INTO contain(`id_task`, `id_theme`) VALUES (:idtask, :value);");
         $queryT->execute(['value' => $value, 'idtask' => $newIdTask]);
@@ -21,5 +21,11 @@ class Theme extends Model
     {
         $queryT =  self::$connection->prepare("DELETE FROM contain WHERE id_task = :idtask");
         $queryT->execute(["idtask" => $idtask]);
+    }
+
+    public function addTheme(array $data)
+    {
+        $query = self::$connection->prepare("INSERT INTO theme (theme_name) VALUES (:newtheme);");
+        return $query->execute($data);
     }
 }

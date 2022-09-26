@@ -139,7 +139,7 @@ class TaskController
         $addTheme = new Theme;
         if (isset($_POST["theme"])) {
             foreach ($_POST["theme"] as $value) {
-                $addTheme->addTheme($value, $idtask);
+                $addTheme->addThemeForATask($value, $idtask);
             }
             header('location:index.php');
         } else header('location:index.php?error=3');
@@ -306,7 +306,7 @@ class TaskController
         if (isset($_POST["theme"])) {
             $theme->deleteThemes($idtask);
             foreach ($_POST["theme"] as $value) {
-                $theme->addTheme($value, $idtask);
+                $theme->addThemeForATask($value, $idtask);
             }
             header('location:index.php');
         } else header('location:index.php?error=notUpdate');

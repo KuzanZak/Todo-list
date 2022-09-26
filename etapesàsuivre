@@ -1,4 +1,0 @@
-class task (enfant de modèle) + controller task + créer des méthodes pour chaque requête SQL 
-class modèle (se connecter à la base de données)
-on crée et appelle les controlleurs dans le fichier index.php
-créer un template page avec tout ce qui est commun = header footer
