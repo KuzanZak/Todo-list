@@ -1,13 +1,3 @@
-// function filter(int) {
-//     document.querySelectorAll(".themes-list-task").forEach(function (themeTask) {
-//         console.log(themeTask);
-//         div = themeTask.parentElement;
-//         div.parentElement.classList.add("hidden");
-//         if(themeTask.getAttribute("id") == int) {
-//             div.parentElement.classList.remove("hidden");
-//         }
-//     });
-// }
 function filter(int) {
     document.querySelectorAll(".list-items").forEach(function (list) {
         const array = list.getAttribute("data-theme").split(",");
@@ -22,9 +12,9 @@ document.getElementById("theme-items").addEventListener("change", function(e){
     filter(this.value);
 });
 
-// document.getElementById("icon-add-theme").addEventListener("click", function(e) {
-//     document.getElementById("add-theme").classList.toggle("display");
-// });
+document.getElementById("icon-add-theme").addEventListener("click", function(e) {
+    document.getElementById("add-theme").classList.toggle("display");
+});
 
 async function asynAction() {
     try{
@@ -43,12 +33,12 @@ async function asynAction() {
     }
 }
 
-// function addTheme(themeName, idtheme){
-//     document.getElementById("themes").innerHTML += `<label><input type="checkbox" name="theme[]" value=${idtheme}>${themeName}<label>`
-// }
+function addTheme(themeName, idtheme){
+    document.getElementById("themes").innerHTML += `<label><input type="checkbox" name="theme[]" value=${idtheme}>${themeName}<label>`
+}
 
-// document.getElementById("add-button").addEventListener("click", function(event){
-//     asynAction();
-// })
+document.getElementById("add-button").addEventListener("click", function(event){
+    asynAction();
+})
 
 

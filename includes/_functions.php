@@ -123,8 +123,12 @@ function getThemeByIdTheme(int $idtask): string
     ]);
     $queryTDID = $queryTD->fetchAll();
     $text = "";
+    $i = 0;
     foreach ($queryTDID as $themeQ) {
-        $text .= "" . $themeQ["id_theme"] . ",";
+        if ($i < (sizeof($queryTDID) - 1)) {
+            $i++;
+            $text .= "" . $themeQ["id_theme"] . ",";
+        } else $text .= $themeQ["id_theme"];
     }
     return $text;
 }
